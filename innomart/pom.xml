@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.innovationstack.innomart</groupId>
-	<artifactId>com-innomart</artifactId>
+	<artifactId>innomart</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>com-innomart</name>
 	<description>Springboot microservice</description>
