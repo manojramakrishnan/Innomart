@@ -4,6 +4,7 @@ public class Users {
 
 	private String userId;
 	private Integer companyId;
+	private Integer groupId;
 	private Integer roleId;
 	private String email;
 	private String passwordHash;
