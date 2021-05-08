@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -18,7 +21,7 @@ public class Users {
 		return "Users [userId=" + userId + ", companyId=" + companyId + ", groupId=" + groupId + ", roleId=" + roleId
 				+ ", email=" + email + ", passwordHash=" + passwordHash + ", firstName=" + firstName + ", middleName="
 				+ middleName + ", lastName=" + lastName + ", status=" + status + ", createDate=" + createDate
-				+ ", salt=" + salt + "]";
+				+ ", company=" + company + "]";
 	}
 
 	@Id
@@ -44,9 +47,19 @@ public class Users {
 	private Integer status;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date createDate;
-	@Column(name="salt",nullable=false)
-	private String salt;
 	
+	@ManyToOne
+	@JoinColumn
+	private Companies company;
+	
+	public Companies getCompany() {
+		return company;
+	}
+
+	public void setCompany(Companies company) {
+		this.company = company;
+	}
+
 	public Users() {
 		
 	}
@@ -139,16 +152,10 @@ public class Users {
 		this.createDate = createDate;
 	}
 
-	public String getSalt() {
-		return salt;
-	}
 
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
 
 	public Users(String userId, Integer companyId, Integer groupId, Integer roleId, String email, String passwordHash,
-			String firstName, String middleName, String lastName, Integer status, Date createDate, String salt) {
+			String firstName, String middleName, String lastName, Integer status, Date createDate, Companies company) {
 		super();
 		this.userId = userId;
 		this.companyId = companyId;
@@ -161,7 +168,7 @@ public class Users {
 		this.lastName = lastName;
 		this.status = status;
 		this.createDate = createDate;
-		this.salt = salt;
+		this.company = company;
 	}
 
 }
