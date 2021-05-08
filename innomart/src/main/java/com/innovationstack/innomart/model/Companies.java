@@ -14,34 +14,35 @@ import javax.persistence.TemporalType;
 public class Companies {
 	@Override
 	public String toString() {
-		return "Companies [companiesId=" + companiesId + ", name=" + name + ", status=" + status + ", createDate="
+		return "Companies [id=" + id + ", companyName=" + companyName + ", status=" + status + ", createDate="
 				+ createDate + "]";
 	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer companiesId;
-	@Column(name="name",nullable=false)
-    private String name;
+	@Column(name = "company_id")
+	private Integer id;
+	@Column(name="companyname",nullable=false)
+    private String companyName;
 	@Column(name="status",nullable=false)
 	private Integer status;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date createDate;
 	
-	public Integer getCompaniesId() {
-		return companiesId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCompaniesId(Integer companiesId) {
-		this.companiesId = companiesId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
-		return name;
+		return companyName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public Integer getStatus() {
@@ -64,10 +65,10 @@ public class Companies {
 		
 	}
 
-	public Companies(Integer companiesId, String name, Integer status, Date createDate) {
+	public Companies(Integer id, String companyName, Integer status, Date createDate) {
 		super();
-		this.companiesId = companiesId;
-		this.name = name;
+		this.id = id;
+		this.companyName = companyName;
 		this.status = status;
 		this.createDate = createDate;
 	}

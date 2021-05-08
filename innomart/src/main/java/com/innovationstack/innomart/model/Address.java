@@ -10,7 +10,9 @@ import javax.persistence.Id;
 public class Address {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer addressId;
+	@Column(name = "address_id")
+	private Integer id;
+	@Column(name="user_id",nullable=false)
 	private String userId;
 	@Column(name="address",nullable=false)
 	private String address;
@@ -26,10 +28,10 @@ public class Address {
 	public Address() {
 		
 	}
-	public Address(Integer addressId, String userId, String address, String phone, String fax, String city,
+	public Address(Integer id, String userId, String address, String phone, String fax, String city,
 			String country) {
 		super();
-		this.addressId = addressId;
+		this.id = id;
 		this.userId = userId;
 		this.address = address;
 		this.phone = phone;
@@ -41,14 +43,14 @@ public class Address {
 	
 	@Override
 	public String toString() {
-		return "Address [addressId=" + addressId + ", userId=" + userId + ", address=" + address + ", phone=" + phone
+		return "Address [id=" + id + ", userId=" + userId + ", address=" + address + ", phone=" + phone
 				+ ", fax=" + fax + ", city=" + city + ", country=" + country + "]";
 	}
-	public Integer getAddressId() {
-		return addressId;
+	public Integer getId() {
+		return id;
 	}
-	public void setAddressId(Integer addressId) {
-		this.addressId = addressId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getUserId() {
 		return userId;

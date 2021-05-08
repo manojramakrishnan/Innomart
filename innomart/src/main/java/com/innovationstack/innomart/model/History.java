@@ -14,28 +14,29 @@ import javax.persistence.TemporalType;
 public class History {
 	@Override
 	public String toString() {
-		return "History [historyId=" + historyId + ", companyId=" + companyId + ", type=" + type + ", createDate="
-				+ createDate + ", value=" + value + "]";
+		return "History [id=" + id + ", companyId=" + companyId + ", companyType=" + companyType + ", createDate="
+				+ createDate + ", companyValue=" + companyValue + "]";
 	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer historyId;
-	@Column(name="companyId",nullable=false)
+	@Column(name = "history_id")
+	private Integer id;
+	@Column(name="companyid",nullable=false)
 	private Integer companyId;
-	@Column(name="type",nullable=false)
-	private Integer type;
+	@Column(name="companytype",nullable=false)
+	private Integer companyType;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date createDate;
-	@Column(name="value",nullable=false)
-	private String value;
+	@Column(name="companyvalue",nullable=false)
+	private String companyValue;
 	
-	public Integer getHistoryId() {
-		return historyId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setHistoryId(Integer historyId) {
-		this.historyId = historyId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getCompanyId() {
@@ -46,12 +47,12 @@ public class History {
 		this.companyId = companyId;
 	}
 
-	public Integer getType() {
-		return type;
+	public Integer getCompanyType() {
+		return companyType;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
+	public void setCompanyType(Integer companyType) {
+		this.companyType = companyType;
 	}
 
 	public java.util.Date getCreateDate() {
@@ -62,21 +63,21 @@ public class History {
 		this.createDate = createDate;
 	}
 
-	public String getValue() {
-		return value;
+	public String getCompanyValue() {
+		return companyValue;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setCompanyValue(String companyValue) {
+		this.companyValue = companyValue;
 	}
 
-	public History(Integer historyId, Integer companyId, Integer type, Date createDate, String value) {
+	public History(Integer id, Integer companyId, Integer companyType, Date createDate, String companyValue) {
 		super();
-		this.historyId = historyId;
+		this.id = id;
 		this.companyId = companyId;
-		this.type = type;
+		this.companyType = companyType;
 		this.createDate = createDate;
-		this.value = value;
+		this.companyValue = companyValue;
 	}
 
 	public History() {

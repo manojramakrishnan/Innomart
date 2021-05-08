@@ -10,27 +10,29 @@ import javax.persistence.Id;
 public class Categories {
 	@Override
 	public String toString() {
-		return "Categories [categoryId=" + categoryId + ", companyId=" + companyId + ", parentId=" + parentId
-				+ ", name=" + name + ", status=" + status + ", description=" + description + "]";
+		return "Categories [id=" + id + ", companyId=" + companyId + ", parentId=" + parentId
+				+ ", appName=" + appName + ", status=" + status + ", description=" + description + "]";
 	}
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer categoryId;
-	@Column(name="companyId",nullable=false)
+	@Column(name = "category_id")
+	private Integer id;
+	@Column(name="companyid",nullable=false)
 	private Integer companyId;
-	@Column(name="parentId",nullable=false)
+	@Column(name="parentid",nullable=false)
 	private Integer parentId;
-	@Column(name="name",nullable=false)
-	private String name;
+	@Column(name="appname",nullable=false)
+	private String appName;
 	@Column(name="status",nullable=false)
 	private Integer status;
-	public Integer getCategoryId() {
-		return categoryId;
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getCompanyId() {
@@ -49,12 +51,12 @@ public class Categories {
 		this.parentId = parentId;
 	}
 
-	public String getName() {
-		return name;
+	public String getAppName() {
+		return appName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String appName) {
+		this.appName = appName;
 	}
 
 	public Integer getStatus() {
@@ -76,13 +78,13 @@ public class Categories {
 	@Column(name="description",nullable=false)
 	private String description;
 	
-	public Categories(Integer categoryId, Integer companyId, Integer parentId, String name, Integer status,
+	public Categories(Integer id, Integer companyId, Integer parentId, String appName, Integer status,
 			String description) {
 		super();
-		this.categoryId = categoryId;
+		this.id = id;
 		this.companyId = companyId;
 		this.parentId = parentId;
-		this.name = name;
+		this.appName = appName;
 		this.status = status;
 		this.description = description;
 	}

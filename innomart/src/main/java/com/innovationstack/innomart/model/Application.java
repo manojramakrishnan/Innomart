@@ -7,14 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class App {
+public class Application {
 
-	public Integer getThemeId() {
-		return themeId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setThemeId(Integer themeId) {
-		this.themeId = themeId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getCompanyId() {
@@ -43,27 +43,28 @@ public class App {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer themeId;
-	@Column(name="companyId",nullable=false)
+	@Column(name = "app_id")
+	private Integer id;
+	@Column(name="companyid",nullable=false)
 	private Integer companyId;
 	@Column(name="status",nullable=false)
 	private Integer status;
-	@Column(name="appDomain",nullable=false)
+	@Column(name="appdomain",nullable=false)
 	private String appDomain;
 	
 	@Override
 	public String toString() {
-		return "App [themeId=" + themeId + ", companyId=" + companyId + ", status=" + status + ", appDomain="
+		return "App [id=" + id + ", companyId=" + companyId + ", status=" + status + ", appDomain="
 				+ appDomain + "]";
 	}
 
-	public App() {
+	public Application() {
 		
 	}
 
-	public App(Integer themeId, Integer companyId, Integer status, String appDomain) {
+	public Application(Integer id, Integer companyId, Integer status, String appDomain) {
 		super();
-		this.themeId = themeId;
+		this.id = id;
 		this.companyId = companyId;
 		this.status = status;
 		this.appDomain = appDomain;

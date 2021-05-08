@@ -11,40 +11,41 @@ public class Theme {
 
 	@Override
 	public String toString() {
-		return "Theme [themeId=" + themeId + ", name=" + name + ", version=" + version + ", thumbnail=" + thumbnail
+		return "Theme [id=" + id + ", themeName=" + themeName + ", version=" + version + ", thumbnail=" + thumbnail
 				+ ", sourcePath=" + sourcePath + "]";
 	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer themeId;
-	@Column(name="name",nullable=false)
-	private String name;
+	@Column(name = "theme_id")
+	private Integer id;
+	@Column(name="themename",nullable=false)
+	private String themeName;
 	@Column(name="version",nullable=false)
 	private String version;
 	@Column(name="thumbnail",nullable=false)
 	private String thumbnail;
-	@Column(name="sourcePath",nullable=false)
+	@Column(name="sourcepath",nullable=false)
 	private String sourcePath;
 	
 	public Theme() {
 		
 	}
 
-	public Integer getThemeId() {
-		return themeId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setThemeId(Integer themeId) {
-		this.themeId = themeId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getThemeName() {
+		return themeName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String themeName) {
+		this.themeName = themeName;
 	}
 
 	public String getVersion() {
@@ -71,10 +72,10 @@ public class Theme {
 		this.sourcePath = sourcePath;
 	}
 
-	public Theme(Integer themeId, String name, String version, String thumbnail, String sourcePath) {
+	public Theme(Integer id, String themeName, String version, String thumbnail, String sourcePath) {
 		super();
-		this.themeId = themeId;
-		this.name = name;
+		this.id = id;
+		this.themeName = themeName;
 		this.version = version;
 		this.thumbnail = thumbnail;
 		this.sourcePath = sourcePath;

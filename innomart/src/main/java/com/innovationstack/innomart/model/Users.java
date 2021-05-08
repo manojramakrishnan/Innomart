@@ -18,7 +18,7 @@ public class Users {
 	
 	@Override
 	public String toString() {
-		return "Users [userId=" + userId + ", companyId=" + companyId + ", groupId=" + groupId + ", roleId=" + roleId
+		return "Users [id=" + id + ", companyId=" + companyId + ", groupId=" + groupId + ", roleId=" + roleId
 				+ ", email=" + email + ", passwordHash=" + passwordHash + ", firstName=" + firstName + ", middleName="
 				+ middleName + ", lastName=" + lastName + ", status=" + status + ", createDate=" + createDate
 				+ ", company=" + company + "]";
@@ -26,22 +26,23 @@ public class Users {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String userId;
-	@Column(name="companyId",nullable=false)
+	@Column(name = "user_id")
+	private Integer id;
+	@Column(name="companyid",nullable=false)
 	private Integer companyId;
-	@Column(name="groupId",nullable=false)
+	@Column(name="groupid",nullable=false)
 	private Integer groupId;
-	@Column(name="roleId",nullable=false)
+	@Column(name="roleid",nullable=false)
 	private Integer roleId;
 	@Column(name="email",nullable=false)
 	private String email;
-	@Column(name="passwordHash",nullable=false)
+	@Column(name="passwordhash",nullable=false)
 	private String passwordHash;
-	@Column(name="firstName",nullable=false)
+	@Column(name="firstname",nullable=false)
 	private String firstName;
-	@Column(name="middleName",nullable=false)
+	@Column(name="middlename",nullable=false)
 	private String middleName;
-	@Column(name="lastName",nullable=false)
+	@Column(name="lastname",nullable=false)
 	private String lastName;
 	@Column(name="status",nullable=false)
 	private Integer status;
@@ -64,12 +65,12 @@ public class Users {
 		
 	}
 
-	public String getUserId() {
-		return userId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getCompanyId() {
@@ -154,10 +155,10 @@ public class Users {
 
 
 
-	public Users(String userId, Integer companyId, Integer groupId, Integer roleId, String email, String passwordHash,
+	public Users(Integer id, Integer companyId, Integer groupId, Integer roleId, String email, String passwordHash,
 			String firstName, String middleName, String lastName, Integer status, Date createDate, Companies company) {
 		super();
-		this.userId = userId;
+		this.id = id;
 		this.companyId = companyId;
 		this.groupId = groupId;
 		this.roleId = roleId;

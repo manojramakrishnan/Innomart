@@ -10,5 +10,7 @@ public class ComInnomartApplication {
 		System.err.println("Hello world!!!");
 		SpringApplication.run(ComInnomartApplication.class, args);
 	}
+	
+	
 
 }
