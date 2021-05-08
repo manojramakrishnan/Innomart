@@ -13,7 +13,7 @@ public class Address {
 	@Column(name = "address_id")
 	private Integer id;
 	@Column(name="user_id",nullable=false)
-	private String userId;
+	private Integer userId;
 	@Column(name="address",nullable=false)
 	private String address;
 	@Column(name="phone",nullable=false)
@@ -28,7 +28,7 @@ public class Address {
 	public Address() {
 		
 	}
-	public Address(Integer id, String userId, String address, String phone, String fax, String city,
+	public Address(Integer id, Integer userId, String address, String phone, String fax, String city,
 			String country) {
 		super();
 		this.id = id;
@@ -52,10 +52,10 @@ public class Address {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	public String getAddress() {

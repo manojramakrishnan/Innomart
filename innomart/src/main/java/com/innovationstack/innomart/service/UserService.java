@@ -26,9 +26,9 @@ public class UserService {
 		return userDAO.findByEmailAndCompanyIdAndStatus(email,companyId,status) ;
 	
 	}
-	public void save(Users signUp) {
+	public Users save(Users signUp) {
 		signUp.setPasswordHash(bCryptPasswordEncoder.encode(signUp.getPasswordHash()));
-		userDAO.registerUser(signUp);
+		return userDAO.registerUser(signUp);
 		
 	}
 	

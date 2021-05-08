@@ -18,7 +18,7 @@ public class Categories {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "category_id")
 	private Integer id;
-	@Column(name="companyid",nullable=false)
+	@Column(name="company_id",nullable=false)
 	private Integer companyId;
 	@Column(name="parentid",nullable=false)
 	private Integer parentId;

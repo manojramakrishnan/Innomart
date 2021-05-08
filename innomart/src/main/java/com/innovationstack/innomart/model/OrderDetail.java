@@ -27,11 +27,11 @@ public class OrderDetail {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "orderdetail_id")
 	private Integer id;
-	@Column(name="parentid",nullable=false)
+	@Column(name="parent_id",nullable=false)
 	private Integer parentId;
-	@Column(name="orderid",nullable=false)
+	@Column(name="order_id",nullable=false)
 	private Integer orderId;
-	@Column(name="productid",nullable=false)
+	@Column(name="product_id",nullable=false)
 	private Integer productId;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date createdAt;

@@ -18,7 +18,7 @@ public class OrderReport {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "orderreport_id")
 	private Integer id;
-	@Column(name="orderid",nullable=false)
+	@Column(name="order_id",nullable=false)
 	private Integer orderId;
 	@Column(name="status",nullable=false)
 	private Integer status;

@@ -18,7 +18,7 @@ public class SupplierProducts {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "supplierproducts_id")
 	private Integer id;
-	@Column(name="supplierid",nullable=false)
+	@Column(name="suppliers_id",nullable=false)
 	private Integer supplierId;
 	
 	public SupplierProducts() {

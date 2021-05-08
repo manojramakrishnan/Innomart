@@ -18,9 +18,9 @@ public class UserDAO {
 		return userRepository.findByEmailAndCompanyIdAndStatus(email,companyId,status);
 	}
 
-	public void registerUser(Users signUp) {
+	public Users registerUser(Users signUp) {
 		// TODO Auto-generated method stub
-		userRepository.save(signUp);
+		return userRepository.save(signUp);
 		
 	}
 

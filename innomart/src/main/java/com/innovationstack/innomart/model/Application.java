@@ -45,7 +45,7 @@ public class Application {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "app_id")
 	private Integer id;
-	@Column(name="companyid",nullable=false)
+	@Column(name="company_id",nullable=false)
 	private Integer companyId;
 	@Column(name="status",nullable=false)
 	private Integer status;

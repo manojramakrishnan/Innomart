@@ -23,15 +23,15 @@ public class OrderAddress {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "orderaddress_id")
 	private Integer id;
-	@Column(name="orderid",nullable=false)
+	@Column(name="order_id",nullable=false)
 	private Integer orderId;
-	@Column(name="addressid",nullable=false)
+	@Column(name="address_id",nullable=false)
 	private Integer addressId;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date createdAt;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date updatedAt;
-	@Column(name="regionid",nullable=false)
+	@Column(name="region_id",nullable=false)
 	private Integer regionId;
 	@Column(name="region",nullable=false)
 	private String region;

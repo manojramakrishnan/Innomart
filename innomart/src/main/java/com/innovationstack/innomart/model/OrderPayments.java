@@ -18,7 +18,7 @@ public class OrderPayments {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "orderpayments_id")
 	private Integer id;
-	@Column(name="paymentid",nullable=false)
+	@Column(name="payment_id",nullable=false)
 	private Integer paymentId;
 	@Column(name="transactionid",nullable=false)
 	private String transactionId;

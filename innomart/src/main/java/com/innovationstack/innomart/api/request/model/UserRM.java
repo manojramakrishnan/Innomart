@@ -13,6 +13,13 @@ public class UserRM {
 	private String city;
 	private String country;
 	private String password;
+	private Integer groupId;
+	public Integer getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -23,7 +30,7 @@ public class UserRM {
 		
 	}
 	public UserRM(String userId, String email, String firstName, String middleName, String lastName, String phone,
-			String fax, String address, String city, String country,String password) {
+			String fax, String address, String city, String country,String password, Integer groupId) {
 		super();
 		this.userId = userId;
 		this.email = email;
@@ -36,6 +43,7 @@ public class UserRM {
 		this.city = city;
 		this.country = country;
 		this.password= password;
+		this.groupId = groupId;
 	}
 	public String getUserId() {
 		return userId;

@@ -28,11 +28,11 @@ public class Users {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Integer id;
-	@Column(name="companyid",nullable=false)
-	private Integer companyId;
+	@Column(name="company_id",nullable=false)
+	private long companyId=0;
 	@Column(name="groupid",nullable=false)
 	private Integer groupId;
-	@Column(name="roleid",nullable=false)
+	@Column(name="roles_id",nullable=false)
 	private Integer roleId;
 	@Column(name="email",nullable=false)
 	private String email;
@@ -73,11 +73,11 @@ public class Users {
 		this.id = id;
 	}
 
-	public Integer getCompanyId() {
+	public long getCompanyId() {
 		return companyId;
 	}
 
-	public void setCompanyId(Integer companyId) {
+	public void setCompanyId(long companyId) {
 		this.companyId = companyId;
 	}
 

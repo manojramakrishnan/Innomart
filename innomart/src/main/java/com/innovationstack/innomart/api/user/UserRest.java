@@ -1,5 +1,6 @@
 package com.innovationstack.innomart.api.user;
 
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,7 +44,8 @@ public class UserRest extends AbstractBaseController {
 			
 			}
 			Users signUp= new Users();
-			signUp.setCompanyId(Integer.parseInt(companyId.toString()));
+			System.err.println("CompanyId:: "+companyId);
+			signUp.setCompanyId(companyId);
 			signUp.setEmail(user.getEmail());
 			signUp.setFirstName(user.getFirstName());
 			signUp.setLastName(user.getLastName());
@@ -51,13 +53,17 @@ public class UserRest extends AbstractBaseController {
 //			signUp.setSalt(UniqueID.getUUID());
 			signUp.setStatus(Constant.USER_STATUS.ACTIVE.getStatus());
 			signUp.setPasswordHash(user.getPassword());
-			userService.save(signUp);
+			signUp.setGroupId(user.getGroupId());
+			signUp.setRoleId(Constant.USER_ROLE.NORMAL_USER.getRoleId());
+			signUp.setCreateDate(new Date());
+			Users usersadd = userService.save(signUp);
 			Address address =new Address();
 			address.setAddress(user.getAddress());
 			address.setCity(user.getCity());
 			address.setCountry(user.getCountry());
 			address.setFax(user.getFax());
 			address.setPhone(user.getPhone());
+			address.setUserId(usersadd.getId());
 			userAddressService.save(address);
 			return responseUtil.successResponse(signUp);
 			

@@ -31,9 +31,9 @@ public class Orders {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "orders_id")
 	private Integer id;
-	@Column(name="userid",nullable=false)
+	@Column(name="user_id",nullable=false)
 	private String userId;
-	@Column(name="companyid",nullable=false)
+	@Column(name="company_id",nullable=false)
 	private Integer companyId;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date createdAt;

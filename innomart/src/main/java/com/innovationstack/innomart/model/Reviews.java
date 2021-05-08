@@ -18,11 +18,11 @@ public class Reviews {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name="userid",nullable=false)
+	@Column(name="user_id",nullable=false)
 	private String userId;
 	@Column(name="productid",nullable=false)
 	private Integer productId;
-	@Column(name="companyid",nullable=false)
+	@Column(name="company_id",nullable=false)
 	private Integer companyId;
 	@Column(name="productrank",nullable=false)
 	private Integer productRank;

@@ -76,5 +76,30 @@ public class Constant {
             return status;
         }
     }
+	
+	public static enum USER_ROLE {
+        SYS_ADMIN(1, "System Admin"),
+        STORE_ADMIN(2, "Store Admin"),
+        STORE_MANAGER(3, "Store Manager"),
+        NORMAL_USER(4, "Normal User"),
+        GUEST(5, "Guest");
+        
+
+        private final int roleId;
+        private final String roleName;
+
+        private USER_ROLE(int id, String name) {
+            this.roleId = id;
+            this.roleName = name;
+        }
+
+        public int getRoleId() {
+            return roleId;
+        }
+
+        public String getRoleName() {
+            return roleName;
+        }
+    }
 
 }

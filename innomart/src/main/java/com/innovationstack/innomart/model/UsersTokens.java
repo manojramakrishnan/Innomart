@@ -21,11 +21,10 @@ public class UsersTokens {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "userstokens_id")
-	private String id;
-	@Column(name="companyid",nullable=false)
+	private Integer id;
+	@Column(name="company_id",nullable=false)
 	private Integer companyId;
-	@Column(name="userid",nullable=false)
+	@Column(name="user_id",nullable=false)
 	private String userId;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date loginDate;
@@ -36,11 +35,11 @@ public class UsersTokens {
 		
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -76,7 +75,7 @@ public class UsersTokens {
 		this.expirationDate = expirationDate;
 	}
 
-	public UsersTokens(String id, Integer companyId, String userId, Date loginDate, Date expirationDate) {
+	public UsersTokens(Integer id, Integer companyId, String userId, Date loginDate, Date expirationDate) {
 		super();
 		this.id = id;
 		this.companyId = companyId;
