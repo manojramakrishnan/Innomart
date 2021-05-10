@@ -16,6 +16,10 @@ public class UserAddressService {
 		addressDAO.saveAddress(address);
 		
 	}
+	public Address getAddressByUserIdAndStatus(int userId) {
+		// TODO Auto-generated method stub
+		return addressDAO.getAddressDetails(userId);
+	}
 	
 	
 

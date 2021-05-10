@@ -9,6 +9,7 @@ public class Mappings {
 	public static final String USER_REGISTER = "/register";
 	
 	public static final String USER_LIST = "/list";
+	public static final String USER_DETAILS = "/detail/{userId}";
 
 
 }

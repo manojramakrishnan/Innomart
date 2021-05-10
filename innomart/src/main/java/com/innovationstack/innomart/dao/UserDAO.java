@@ -13,6 +13,10 @@ public class UserDAO {
 	
 	@Autowired
 	private UserRepository userRepository;
+	public Users findByUserIdAndCompanyIdAndStatus(int userId, Long companyId, int status) {
+		return userRepository.findByUserIdAndCompanyIdAndStatus(userId,companyId,status);
+		
+	}
 	
 	public Users findByEmailAndCompanyIdAndStatus(String email, Long companyId, int status) {
 		// TODO Auto-generated method stub

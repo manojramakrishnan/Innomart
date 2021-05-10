@@ -20,6 +20,7 @@ import com.innovationstack.innomart.api.controller.AbstractBaseController;
 import com.innovationstack.innomart.api.request.model.UserListRM;
 import com.innovationstack.innomart.api.request.model.UserRM;
 import com.innovationstack.innomart.api.response.model.RestResponse;
+import com.innovationstack.innomart.api.response.model.UserDetailRM;
 import com.innovationstack.innomart.api.response.model.util.RestStatus;
 import com.innovationstack.innomart.exception.ApplicationException;
 import com.innovationstack.innomart.model.Address;
@@ -96,5 +97,36 @@ public class UserRest extends AbstractBaseController {
 			throw new ApplicationException(RestStatus.ERR_GET_LIST_USERS);
 		}
 	}
+	@RequestMapping(path=Mappings.USER_DETAILS,method=RequestMethod.GET, produces=Mappings.CHARSET)
+	public ResponseEntity<RestResponse> getUserDetails(@PathVariable Long companyId,@PathVariable int userId ){
+	Users existingUser= userService.getUserByUserIdAndCompanyIdAndStatus(userId,companyId,Constant.STATUS.ACTIVE_STATUS.getValue());
+	if(existingUser != null ) {
+		Address address = userAddressService.getAddressByUserIdAndStatus(userId );
+		if(address != null) {
+			UserDetailRM response =new UserDetailRM();
+			response.setCompanyId(companyId);
+			response.setUserId(userId);
+			response.setRoleId(existingUser.getRoleId());
+			response.setFirstName(existingUser.getFirstName());
+			response.setMiddleName(existingUser.getMiddleName());
+			response.setLastName(existingUser.getLastName());
+			response.setEmail(existingUser.getEmail());
+			response.setCreateDate(existingUser.getCreateDate());
+			response.setPhone(address.getPhone());
+			response.setFax(address.getFax());
+			response.setAddress(address.getAddress());
+			response.setCity(address.getCity());
+			response.setCountry(address.getCountry());
+			return responseUtil.successResponse(response);		
+		}
+		else {
+			throw new ApplicationException(RestStatus.ERR_USER_NOT_FOUND);
+		}
+	
+	}
+	else {
+		throw new ApplicationException(RestStatus.ERR_USER_NOT_FOUND);
+	}
 
+	}
 }
