@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 public class Users {
@@ -48,7 +49,17 @@ public class Users {
 	private Integer status;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date createDate;
+	@Transient
+	private Address address;
 	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	@ManyToOne
 	@JoinColumn
 	private Companies company;

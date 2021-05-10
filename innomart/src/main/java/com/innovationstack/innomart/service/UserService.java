@@ -1,7 +1,10 @@
 package com.innovationstack.innomart.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,8 @@ import com.innovationstack.innomart.model.Users;
 public class UserService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+	@Autowired
+	private UserAddressService userAddressService;
 	private UserDAO userDAO;
 	
 	public UserService(@Qualifier("userDAO") UserDAO userDAO,
@@ -26,9 +30,17 @@ public class UserService {
 		return userDAO.findByEmailAndCompanyIdAndStatus(email,companyId,status) ;
 	
 	}
+	@Transactional
 	public Users save(Users signUp) {
 		signUp.setPasswordHash(bCryptPasswordEncoder.encode(signUp.getPasswordHash()));
-		return userDAO.registerUser(signUp);
+		Users userAdd= userDAO.registerUser(signUp);
+		userAdd.getAddress().setUserId(userAdd.getId());
+		userAddressService.save(userAdd.getAddress());
+		return userAdd;
+	}
+	public Users doFilterSearchSortPagingUser(Long companyId) {
+		// TODO Auto-generated method stub
+		return userDAO.findAllUsers(companyId);
 		
 	}
 	

@@ -1,6 +1,7 @@
 package com.innovationstack.innomart.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import com.innovationstack.innomart.model.Users;
@@ -22,6 +23,11 @@ public class UserDAO {
 		// TODO Auto-generated method stub
 		return userRepository.save(signUp);
 		
+	}
+
+	public Users findAllUsers( Long companyId) {
+		// TODO Auto-generated method stub
+		return userRepository.findAllByCompanyId(companyId);
 	}
 
 }

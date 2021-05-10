@@ -101,5 +101,5 @@ public class Constant {
             return roleName;
         }
     }
-
+	public static final String HEADER_TOKEN= "X-Access-Token";
 }
