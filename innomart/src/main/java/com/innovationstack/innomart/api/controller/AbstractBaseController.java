@@ -1,32 +1,27 @@
 package com.innovationstack.innomart.api.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.innovationstack.innomart.api.response.model.util.ResponseUtil;
-import com.innovationstack.innomart.auth.AuthUser;
-import com.innovationstack.innomart.auth.service.CustomUserAuthService;
 import com.innovationstack.innomart.configs.AppConfig;
-import com.innovationstack.innomart.util.Constant;
 
 public abstract class AbstractBaseController {
 	
 	@Autowired
     protected ResponseUtil responseUtil;
 	
-	@Autowired
-	private CustomUserAuthService userDetailService;
-	
+//	@Autowired
+//	private CustomUserAuthService userDetailService;
+//	
 	@Autowired
 	AppConfig appConfig;
 	
-	public AuthUser getAuthUserFromSession(HttpServletRequest request) {
-        String authToken = request.getHeader(Constant.HEADER_TOKEN);
-        // try to load sessio
-        AuthUser user = userDetailService.loadUserByAccessToken(authToken);
-        return user;
-    }
+//	public AuthUser getAuthUserFromSession(HttpServletRequest request) {
+//        String authToken = request.getHeader(Constant.HEADER_TOKEN);
+//        // try to load sessio
+//        AuthUser user = userDetailService.loadUserByAccessToken(authToken);
+//        return user;
+//    }
 
 
 }
