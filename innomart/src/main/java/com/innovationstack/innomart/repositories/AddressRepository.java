@@ -8,6 +8,9 @@ import com.innovationstack.innomart.model.Address;
 
 @Repository("addressRepository")
 public interface AddressRepository extends JpaRepository<Address,Integer> {
+	
+	@Query("SELECT a FROM Address a where a.userId= :userId")
+	Address getAddressForUserId(int userId);
 
 
 

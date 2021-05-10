@@ -13,7 +13,9 @@ public class UserDAO {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
 	public Users findByUserIdAndCompanyIdAndStatus(int userId, Long companyId, int status) {
+		System.err.println("details :::: "+userId+ " "+companyId+ " "+status);
 		return userRepository.findByUserIdAndCompanyIdAndStatus(userId,companyId,status);
 		
 	}
