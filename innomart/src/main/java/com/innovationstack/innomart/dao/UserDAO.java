@@ -36,4 +36,9 @@ public class UserDAO {
 		return userRepository.findAllByCompanyId(companyId);
 	}
 
+	public Users findByUserIdAndCompanyIdAndStatus(String userId, Long companyId, int status) {
+		// TODO Auto-generated method stub
+		return userRepository.findByUserIdAndCompanyIdAndStatus(userId, companyId, status);
+	}
+
 }

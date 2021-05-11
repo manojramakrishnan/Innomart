@@ -99,7 +99,7 @@ public class UserRest extends AbstractBaseController {
 	}
 	@RequestMapping(path=Mappings.USER_DETAILS,method=RequestMethod.GET, produces=Mappings.CHARSET)
 	public ResponseEntity<RestResponse> getUserDetails(@PathVariable Long companyId,@PathVariable int userId ){
-	Users existingUser= userService.getUserByUserIdAndCompanyIdAndStatus(userId,companyId,Constant.STATUS.ACTIVE_STATUS.getValue());
+	Users existingUser= userService.getUserByUserIdAndCompanyIdAndStatus(userId,companyId,Constant.USER_STATUS.ACTIVE.getStatus());
 	if(existingUser != null ) {
 		Address address = userAddressService.getAddressByUserIdAndStatus(userId );
 		if(address != null) {
@@ -129,4 +129,42 @@ public class UserRest extends AbstractBaseController {
 	}
 
 	}
+
+	@RequestMapping(path=Mappings.UPDATE_USER,method=RequestMethod.POST, produces=Mappings.CHARSET)
+	public ResponseEntity<RestResponse> updateUser (@PathVariable Long companyId, @RequestBody UserRM user){
+	Users existingUser= userService.getUserByUserIdAndCompanyIdAndStatus(user.getUserId(),companyId, Constant.USER_STATUS.ACTIVE.getStatus());
+	if(existingUser != null) {
+		existingUser.setFirstName(user.getFirstName());
+		existingUser.setMiddleName(user.getMiddleName());
+		existingUser.setLastName(user.getLastName());
+	
+	
+	
+	Address address = userAddressService.getAddressByUserIdAndStatus(Integer.parseInt(user.getUserId()));
+		if(address !=null) {
+			address.setAddress(user.getAddress());
+			address.setCity(user.getCity());
+			address.setCountry(user.getCountry());
+			address.setFax(user.getFax());
+			address.setPhone(user.getPhone());
+		}
+		else {
+			throw new ApplicationException(RestStatus.ERR_USER_ADDRESS_NOT_FOUND);
+		}
+		
+		
+		existingUser.setAddress(address);
+		userService.save(existingUser);
+
+		return responseUtil.successResponse(existingUser);
+
+
+	}
+	else {
+		throw new ApplicationException(RestStatus.ERR_USER_NOT_FOUND);
+	}
+
+
+	}
+
 }

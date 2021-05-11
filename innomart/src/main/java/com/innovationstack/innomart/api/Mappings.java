@@ -10,6 +10,6 @@ public class Mappings {
 	
 	public static final String USER_LIST = "/list";
 	public static final String USER_DETAILS = "/detail/{userId}";
-
+	public static final String UPDATE_USER = "/update"; 
 
 }

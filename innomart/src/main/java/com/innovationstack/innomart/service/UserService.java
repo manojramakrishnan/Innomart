@@ -46,6 +46,10 @@ public class UserService {
 		// TODO Auto-generated method stub
 		return userDAO.findByUserIdAndCompanyIdAndStatus(userId,companyId,status);
 	}
+	public Users getUserByUserIdAndCompanyIdAndStatus(String userId, Long companyId, int status) {
+		// TODO Auto-generated method stub
+		return userDAO.findByUserIdAndCompanyIdAndStatus(userId, companyId, status);
+	}
 	
 	
 	
