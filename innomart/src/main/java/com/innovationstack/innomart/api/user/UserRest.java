@@ -36,134 +36,128 @@ public class UserRest extends AbstractBaseController {
 	private UserService userService;
 	@Autowired
 	private UserAddressService userAddressService;
-	@RequestMapping(path=Mappings.USER_REGISTER,method=RequestMethod.POST, produces=Mappings.CHARSET)
-	public ResponseEntity<RestResponse> register (@PathVariable Long companyId, @RequestBody UserRM user){
-	Users existingUser= userService.getUserByEmail(user.getEmail(),companyId, Constant.STATUS.ACTIVE_STATUS.getValue());	
-	if (existingUser == null) {
-		String email= user.getEmail();
-		if(email != null && !email.equals("")) {
-			Pattern pattern= Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-			Matcher matcher = pattern.matcher(email);
-			if(!matcher.matches()) {
-				throw new ApplicationException(RestStatus.ERR_INVALID_DATA);
-			
-			}
-			Users signUp= new Users();
-			System.err.println("CompanyId:: "+companyId);
-			signUp.setCompanyId(companyId);
-			signUp.setEmail(user.getEmail());
-			signUp.setFirstName(user.getFirstName());
-			signUp.setLastName(user.getLastName());
-			signUp.setMiddleName(user.getMiddleName());
+
+	@RequestMapping(path = Mappings.USER_REGISTER, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse> register(@PathVariable Long companyId, @RequestBody UserRM user) {
+		Users existingUser = userService.getUserByEmail(user.getEmail(), companyId,
+				Constant.STATUS.ACTIVE_STATUS.getValue());
+		if (existingUser == null) {
+			String email = user.getEmail();
+			if (email != null && !email.equals("")) {
+				Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+						Pattern.CASE_INSENSITIVE);
+				Matcher matcher = pattern.matcher(email);
+				if (!matcher.matches()) {
+					throw new ApplicationException(RestStatus.ERR_INVALID_DATA);
+
+				}
+				Users signUp = new Users();
+				System.err.println("CompanyId:: " + companyId);
+				signUp.setCompanyId(companyId);
+				signUp.setEmail(user.getEmail());
+				signUp.setFirstName(user.getFirstName());
+				signUp.setLastName(user.getLastName());
+				signUp.setMiddleName(user.getMiddleName());
 //			signUp.setSalt(UniqueID.getUUID());
-			signUp.setStatus(Constant.USER_STATUS.ACTIVE.getStatus());
-			signUp.setPasswordHash(user.getPassword());
-			signUp.setGroupId(user.getGroupId());
-			signUp.setRoleId(Constant.USER_ROLE.NORMAL_USER.getRoleId());
-			signUp.setCreateDate(new Date());
-			Address address =new Address();
-			address.setAddress(user.getAddress());
-			address.setCity(user.getCity());
-			address.setCountry(user.getCountry());
-			address.setFax(user.getFax());
-			address.setPhone(user.getPhone());
-			//address.setUserId(usersadd.getId());
-			signUp.setAddress(address);
-			Users usersadd = userService.save(signUp);
-			
-			//userAddressService.save(address);
-			return responseUtil.successResponse(signUp);
-			
-			
-		} 
-		else {
-			throw new ApplicationException(RestStatus.ERR_INVALID_DATA);
+				signUp.setStatus(Constant.USER_STATUS.ACTIVE.getStatus());
+				signUp.setPasswordHash(user.getPassword());
+				signUp.setGroupId(user.getGroupId());
+				signUp.setRoleId(Constant.USER_ROLE.NORMAL_USER.getRoleId());
+				signUp.setCreateDate(new Date());
+				Address address = new Address();
+				address.setAddress(user.getAddress());
+				address.setCity(user.getCity());
+				address.setCountry(user.getCountry());
+				address.setFax(user.getFax());
+				address.setPhone(user.getPhone());
+				// address.setUserId(usersadd.getId());
+				signUp.setAddress(address);
+				Users usersadd = userService.save(signUp);
+
+				// userAddressService.save(address);
+				return responseUtil.successResponse(signUp);
+
+			} else {
+				throw new ApplicationException(RestStatus.ERR_INVALID_DATA);
+			}
+
+		} else {
+			throw new ApplicationException(RestStatus.USER_ALREADY_EXIST);
 		}
-	
+
 	}
-	else {
-		throw new ApplicationException(RestStatus.USER_ALREADY_EXIST);
-	}
-	
-	}
-	@RequestMapping(path=Mappings.USER_LIST,method=RequestMethod.POST, produces=Mappings.CHARSET)
-	public ResponseEntity<RestResponse> getUserList(HttpServletRequest request, @PathVariable Long companyId){
+
+	@RequestMapping(path = Mappings.USER_LIST, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse> getUserList(HttpServletRequest request, @PathVariable Long companyId) {
 		try {
-		//	String userId= getAuthUserFromSession(request).getId();
-			Users users= userService.doFilterSearchSortPagingUser(companyId);
+			// String userId= getAuthUserFromSession(request).getId();
+			Users users = userService.doFilterSearchSortPagingUser(companyId);
 			return responseUtil.successResponse(users);
-		}
-		catch( Exception e) {
+		} catch (Exception e) {
 			throw new ApplicationException(RestStatus.ERR_GET_LIST_USERS);
 		}
 	}
-	@RequestMapping(path=Mappings.USER_DETAILS,method=RequestMethod.GET, produces=Mappings.CHARSET)
-	public ResponseEntity<RestResponse> getUserDetails(@PathVariable Long companyId,@PathVariable int userId ){
-	Users existingUser= userService.getUserByUserIdAndCompanyIdAndStatus(userId,companyId,Constant.USER_STATUS.ACTIVE.getStatus());
-	if(existingUser != null ) {
-		Address address = userAddressService.getAddressByUserIdAndStatus(userId );
-		if(address != null) {
-			UserDetailRM response =new UserDetailRM();
-			response.setCompanyId(companyId);
-			response.setUserId(userId);
-			response.setRoleId(existingUser.getRoleId());
-			response.setFirstName(existingUser.getFirstName());
-			response.setMiddleName(existingUser.getMiddleName());
-			response.setLastName(existingUser.getLastName());
-			response.setEmail(existingUser.getEmail());
-			response.setCreateDate(existingUser.getCreateDate());
-			response.setPhone(address.getPhone());
-			response.setFax(address.getFax());
-			response.setAddress(address.getAddress());
-			response.setCity(address.getCity());
-			response.setCountry(address.getCountry());
-			return responseUtil.successResponse(response);		
-		}
-		else {
+
+	@RequestMapping(path = Mappings.USER_DETAILS, method = RequestMethod.GET, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse> getUserDetails(@PathVariable Long companyId, @PathVariable int userId) {
+		Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(userId, companyId,
+				Constant.USER_STATUS.ACTIVE.getStatus());
+		if (existingUser != null) {
+			Address address = userAddressService.getAddressByUserIdAndStatus(userId);
+			if (address != null) {
+				UserDetailRM response = new UserDetailRM();
+				response.setCompanyId(companyId);
+				response.setUserId(userId);
+				response.setRoleId(existingUser.getRoleId());
+				response.setFirstName(existingUser.getFirstName());
+				response.setMiddleName(existingUser.getMiddleName());
+				response.setLastName(existingUser.getLastName());
+				response.setEmail(existingUser.getEmail());
+				response.setCreateDate(existingUser.getCreateDate());
+				response.setPhone(address.getPhone());
+				response.setFax(address.getFax());
+				response.setAddress(address.getAddress());
+				response.setCity(address.getCity());
+				response.setCountry(address.getCountry());
+				return responseUtil.successResponse(response);
+			} else {
+				throw new ApplicationException(RestStatus.ERR_USER_NOT_FOUND);
+			}
+
+		} else {
 			throw new ApplicationException(RestStatus.ERR_USER_NOT_FOUND);
 		}
-	
-	}
-	else {
-		throw new ApplicationException(RestStatus.ERR_USER_NOT_FOUND);
-	}
 
 	}
 
-	@RequestMapping(path=Mappings.UPDATE_USER,method=RequestMethod.POST, produces=Mappings.CHARSET)
-	public ResponseEntity<RestResponse> updateUser (@PathVariable Long companyId, @RequestBody UserRM user){
-	Users existingUser= userService.getUserByUserIdAndCompanyIdAndStatus(user.getUserId(),companyId, Constant.USER_STATUS.ACTIVE.getStatus());
-	if(existingUser != null) {
-		existingUser.setFirstName(user.getFirstName());
-		existingUser.setMiddleName(user.getMiddleName());
-		existingUser.setLastName(user.getLastName());
-	
-	
-	
-	Address address = userAddressService.getAddressByUserIdAndStatus(Integer.parseInt(user.getUserId()));
-		if(address !=null) {
-			address.setAddress(user.getAddress());
-			address.setCity(user.getCity());
-			address.setCountry(user.getCountry());
-			address.setFax(user.getFax());
-			address.setPhone(user.getPhone());
+	@RequestMapping(path = Mappings.UPDATE_USER, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse> updateUser(@PathVariable Long companyId, @RequestBody UserRM user) {
+		Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(Integer.parseInt(user.getUserId()), companyId,
+				Constant.STATUS.ACTIVE_STATUS.getValue());
+		if (existingUser != null) {
+			existingUser.setFirstName(user.getFirstName());
+			existingUser.setMiddleName(user.getMiddleName());
+			existingUser.setLastName(user.getLastName());
+
+			Address address = userAddressService.getAddressByUserIdAndStatus(Integer.parseInt(user.getUserId()));
+			if (address != null) {
+				address.setAddress(user.getAddress());
+				address.setCity(user.getCity());
+				address.setCountry(user.getCountry());
+				address.setFax(user.getFax());
+				address.setPhone(user.getPhone());
+			} else {
+				throw new ApplicationException(RestStatus.ERR_USER_ADDRESS_NOT_FOUND);
+			}
+
+			existingUser.setAddress(address);
+			userService.save(existingUser);
+
+			return responseUtil.successResponse(existingUser);
+
+		} else {
+			throw new ApplicationException(RestStatus.ERR_USER_NOT_FOUND);
 		}
-		else {
-			throw new ApplicationException(RestStatus.ERR_USER_ADDRESS_NOT_FOUND);
-		}
-		
-		
-		existingUser.setAddress(address);
-		userService.save(existingUser);
-
-		return responseUtil.successResponse(existingUser);
-
-
-	}
-	else {
-		throw new ApplicationException(RestStatus.ERR_USER_NOT_FOUND);
-	}
-
 
 	}
 
