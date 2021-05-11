@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.innovationstack.innomart.api.Mappings;
@@ -163,10 +164,11 @@ public class UserRest extends AbstractBaseController {
 	}
 
 	@RequestMapping(path = Mappings.DELETE_USER, method = RequestMethod.POST, produces = Mappings.CHARSET)
-	public ResponseEntity<RestResponse> deleteUser( @PathVariable Long companyId,@RequestBody List<String> userIds  ) {
+	public ResponseEntity<RestResponse> deleteUser( @PathVariable Long companyId,@RequestParam List<String> userIds  ) {
 		
 		if(userIds != null && userIds.size() > 0) {
 			for (String userId : userIds) {
+				System.err.println("UserId ::: "+userId);
 				Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(Integer.parseInt(userId), companyId,
 						Constant.USER_STATUS.ACTIVE.getStatus());		
 			if(existingUser != null) {
