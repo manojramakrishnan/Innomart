@@ -20,4 +20,8 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
 
 	@Query("SELECT u FROM Users u WHERE u.id = :userId AND u.companyId = :companyId And u.status = :status")
 	Users findByUserIdAndCompanyIdAndStatus(String userId, Long companyId, int status);
+
+
+	@Query("SELECT u FROM Users u WHERE u.companyId = :companyId And u.status = :status")
+	Users findByCompanyIdAndStatus(Long companyId, int status);
 }

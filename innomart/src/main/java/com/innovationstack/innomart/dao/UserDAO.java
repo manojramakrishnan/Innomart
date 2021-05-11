@@ -41,4 +41,9 @@ public class UserDAO {
 		return userRepository.findByUserIdAndCompanyIdAndStatus(userId, companyId, status);
 	}
 
+	public Users findBYCompanyIdAndStatus(Long companyId, int status) {
+		// TODO Auto-generated method stub
+		return userRepository.findByCompanyIdAndStatus( companyId, status);
+	}
+
 }

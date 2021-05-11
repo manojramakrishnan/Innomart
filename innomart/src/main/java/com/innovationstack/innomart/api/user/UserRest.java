@@ -1,6 +1,7 @@
 package com.innovationstack.innomart.api.user;
 
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -132,8 +133,8 @@ public class UserRest extends AbstractBaseController {
 
 	@RequestMapping(path = Mappings.UPDATE_USER, method = RequestMethod.POST, produces = Mappings.CHARSET)
 	public ResponseEntity<RestResponse> updateUser(@PathVariable Long companyId, @RequestBody UserRM user) {
-		Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(Integer.parseInt(user.getUserId()), companyId,
-				Constant.STATUS.ACTIVE_STATUS.getValue());
+		Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(Integer.parseInt(user.getUserId()),
+				companyId, Constant.STATUS.ACTIVE_STATUS.getValue());
 		if (existingUser != null) {
 			existingUser.setFirstName(user.getFirstName());
 			existingUser.setMiddleName(user.getMiddleName());
@@ -161,4 +162,30 @@ public class UserRest extends AbstractBaseController {
 
 	}
 
+	@RequestMapping(path = Mappings.DELETE_USER, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse> deleteUser( @PathVariable Long companyId,@RequestBody List<String> userIds  ) {
+		
+		if(userIds != null && userIds.size() > 0) {
+			for (String userId : userIds) {
+				Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(Integer.parseInt(userId), companyId,
+						Constant.USER_STATUS.ACTIVE.getStatus());		
+			if(existingUser != null) {
+				existingUser.setStatus(Constant.USER_STATUS.INACTIVE.getStatus());
+				userService.save(existingUser);
+			}
+			
+			}
+			return responseUtil.successResponse("Deleted Users Successfully");
+		
+		
+		
+		
+		
+		
+	}
+	else {
+		throw new ApplicationException(RestStatus.ERR_BAD_REQUEST);
+	
+	}
+	}
 }
