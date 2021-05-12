@@ -46,4 +46,6 @@ public class UserDAO {
 		return userRepository.findByCompanyIdAndStatus( companyId, status);
 	}
 
+	
+
 }

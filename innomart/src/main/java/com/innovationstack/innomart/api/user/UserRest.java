@@ -172,8 +172,10 @@ public class UserRest extends AbstractBaseController {
 				Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(Integer.parseInt(userId), companyId,
 						Constant.USER_STATUS.ACTIVE.getStatus());		
 			if(existingUser != null) {
+				
 				existingUser.setStatus(Constant.USER_STATUS.INACTIVE.getStatus());
-				userService.save(existingUser);
+				System.err.println("status :: "+existingUser.getStatus());
+				userService.delete(existingUser);
 			}
 			
 			}

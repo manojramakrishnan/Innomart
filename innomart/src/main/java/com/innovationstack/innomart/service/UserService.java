@@ -1,5 +1,7 @@
 package com.innovationstack.innomart.service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class UserService {
 	@Autowired
 	private UserAddressService userAddressService;
 	private UserDAO userDAO;
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	public UserService(@Qualifier("userDAO") UserDAO userDAO,
 			BCryptPasswordEncoder bCryptPasswordEncoder	) {
@@ -54,6 +59,15 @@ public class UserService {
 	public Users getUserByCompanyIdAndStatus(Long companyId, int status) {
 		// TODO Auto-generated method stub
 		return userDAO.findBYCompanyIdAndStatus(companyId,status);
+	}
+	@Transactional
+	public void delete(Users existingUser) {
+		Users deleteUser=entityManager.find(Users.class, existingUser.getId());
+		deleteUser.setStatus(existingUser.getStatus());
+		
+		entityManager.merge(deleteUser);
+		//return deleteUser;
+		
 	}
 	
 	

@@ -24,4 +24,7 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
 
 	@Query("SELECT u FROM Users u WHERE u.companyId = :companyId And u.status = :status")
 	Users findByCompanyIdAndStatus(Long companyId, int status);
+
+	
+	
 }
