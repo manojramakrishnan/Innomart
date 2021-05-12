@@ -1,14 +1,15 @@
 package com.innovationstack.innomart.api.user;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.innovationstack.innomart.api.Mappings;
 import com.innovationstack.innomart.api.controller.AbstractBaseController;
-import com.innovationstack.innomart.api.request.model.UserListRM;
+import com.innovationstack.innomart.api.email.request.MailRequest;
+import com.innovationstack.innomart.api.email.service.EmailService;
 import com.innovationstack.innomart.api.request.model.UserRM;
 import com.innovationstack.innomart.api.response.model.RestResponse;
 import com.innovationstack.innomart.api.response.model.UserDetailRM;
@@ -38,6 +40,9 @@ public class UserRest extends AbstractBaseController {
 	private UserService userService;
 	@Autowired
 	private UserAddressService userAddressService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping(path = Mappings.USER_REGISTER, method = RequestMethod.POST, produces = Mappings.CHARSET)
 	public ResponseEntity<RestResponse> register(@PathVariable Long companyId, @RequestBody UserRM user) {
@@ -75,8 +80,15 @@ public class UserRest extends AbstractBaseController {
 				// address.setUserId(usersadd.getId());
 				signUp.setAddress(address);
 				Users usersadd = userService.save(signUp);
-
-				// userAddressService.save(address);
+				MailRequest request = new MailRequest();
+				request.setFrom("manoj.rgv@gmail.com");
+				request.setSubject("Test mail");
+				request.setTo(user.getEmail());
+				request.setName(user.getFirstName());
+				Map<String, Object> model = new HashMap<>();
+				model.put("Name", request);
+				
+				emailService.sendEmail(request, model);
 				return responseUtil.successResponse(signUp);
 
 			} else {
