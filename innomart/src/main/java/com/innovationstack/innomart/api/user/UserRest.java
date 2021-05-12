@@ -66,7 +66,7 @@ public class UserRest extends AbstractBaseController {
 				signUp.setLastName(user.getLastName());
 				signUp.setMiddleName(user.getMiddleName());
 //			signUp.setSalt(UniqueID.getUUID());
-				signUp.setStatus(Constant.USER_STATUS.ACTIVE.getStatus());
+				signUp.setStatus(Constant.USER_STATUS.PENDING.getStatus());
 				signUp.setPasswordHash(user.getPassword());
 				signUp.setGroupId(user.getGroupId());
 				signUp.setRoleId(Constant.USER_ROLE.NORMAL_USER.getRoleId());
