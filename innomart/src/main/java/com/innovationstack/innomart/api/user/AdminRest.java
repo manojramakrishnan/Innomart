@@ -39,7 +39,7 @@ public class AdminRest extends AbstractBaseController {
 		for (String userId : userIds) {
 			
 			Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(Integer.parseInt(userId), companyId,
-					Constant.USER_STATUS.ACTIVE.getStatus());				
+					Constant.USER_STATUS.PENDING.getStatus());				
 			if(existingUser != null) {
 				
 				existingUser.setStatus(Constant.USER_STATUS.ACTIVE.getStatus());

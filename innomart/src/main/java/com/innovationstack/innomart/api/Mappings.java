@@ -14,5 +14,7 @@ public class Mappings {
 	public static final String UPDATE_USER = "/update";
 	public static final String DELETE_USER = "/delete";
 	public static final String APPROVE_REGISTERED_USERS = "/approve"; 
+	
+	public static final String USERS_LOGIN = "/login";
 
 }

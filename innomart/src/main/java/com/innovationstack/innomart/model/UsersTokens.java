@@ -15,47 +15,58 @@ public class UsersTokens {
 	
 	@Override
 	public String toString() {
-		return "UsersTokens [id=" + id + ", companyId=" + companyId + ", userId=" + userId + ", loginDate="
-				+ loginDate + ", expirationDate=" + expirationDate + "]";
+		return "UsersTokens [token=" + token + ", companyId=" + companyId + ", userId=" + userId + ", loginDate="
+				+ loginDate + ", expirationDate=" + expirationDate + ", sessionData=" + sessionData + "]";
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private String token;
 	@Column(name="company_id",nullable=false)
-	private Integer companyId;
+	private Long companyId;
 	@Column(name="user_id",nullable=false)
-	private String userId;
+	private Integer userId;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date loginDate;
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date expirationDate;
 	
+	@Column(name="session_data" , nullable=false)
+	private String sessionData;
+	
+	public String getSessionData() {
+		return sessionData;
+	}
+
+	public void setSessionData(String sessionData) {
+		this.sessionData = sessionData;
+	}
+
 	public UsersTokens() {
 		
 	}
 
-	public Integer getId() {
-		return id;
+	public String getToken() {
+		return token;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setToken(String token) {
+		this.token = token;
 	}
 
-	public Integer getCompanyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
 
-	public void setCompanyId(Integer companyId) {
+	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -75,13 +86,14 @@ public class UsersTokens {
 		this.expirationDate = expirationDate;
 	}
 
-	public UsersTokens(Integer id, Integer companyId, String userId, Date loginDate, Date expirationDate) {
+	public UsersTokens(String token, Long companyId, Integer userId, Date loginDate, Date expirationDate, String sessionData) {
 		super();
-		this.id = id;
+		this.token = token;
 		this.companyId = companyId;
 		this.userId = userId;
 		this.loginDate = loginDate;
 		this.expirationDate = expirationDate;
+		this.sessionData = sessionData;
 	}
 	
 }

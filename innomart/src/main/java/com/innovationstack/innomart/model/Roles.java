@@ -52,7 +52,7 @@ public class Roles {
 
 	public Roles(Integer roleId, String roleName, String description) {
 		super();
-		this.id = id;
+		this.id = roleId;
 		this.roleName = roleName;
 		this.description = description;
 	}

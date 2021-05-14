@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class AuthUser implements UserDetails {
 
 	
-	private final String id;
+	private final Integer id;
     private final String username;
     private final String password;
     private String firstName;
@@ -22,7 +22,7 @@ public class AuthUser implements UserDetails {
     private String role;
     
     public AuthUser(
-            String id,
+            Integer id,
             String username,
             String password, String role, String firstName, String lastName,
             boolean enabled
@@ -36,7 +36,7 @@ public class AuthUser implements UserDetails {
         this.enabled = enabled;
     }
     @JsonIgnore
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

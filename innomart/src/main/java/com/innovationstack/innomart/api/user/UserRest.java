@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +26,16 @@ import com.innovationstack.innomart.api.Mappings;
 import com.innovationstack.innomart.api.controller.AbstractBaseController;
 import com.innovationstack.innomart.api.email.request.MailRequest;
 import com.innovationstack.innomart.api.email.service.EmailService;
+import com.innovationstack.innomart.api.request.model.AuthRM;
 import com.innovationstack.innomart.api.request.model.UserRM;
 import com.innovationstack.innomart.api.response.model.RestResponse;
 import com.innovationstack.innomart.api.response.model.UserDetailRM;
 import com.innovationstack.innomart.api.response.model.util.RestStatus;
+import com.innovationstack.innomart.auth.service.AuthService;
 import com.innovationstack.innomart.exception.ApplicationException;
 import com.innovationstack.innomart.model.Address;
 import com.innovationstack.innomart.model.Users;
+import com.innovationstack.innomart.model.UsersTokens;
 import com.innovationstack.innomart.service.UserAddressService;
 import com.innovationstack.innomart.service.UserService;
 import com.innovationstack.innomart.util.Constant;
@@ -43,6 +50,12 @@ public class UserRest extends AbstractBaseController {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private AuthService authService;
 
 	@RequestMapping(path = Mappings.USER_REGISTER, method = RequestMethod.POST, produces = Mappings.CHARSET)
 	public ResponseEntity<RestResponse> register(@PathVariable Long companyId, @RequestBody UserRM user) {
@@ -204,4 +217,52 @@ public class UserRest extends AbstractBaseController {
 	
 	}
 	}
+	
+	@RequestMapping(value = Mappings.USERS_LOGIN, method = RequestMethod.POST, produces = Mappings.CHARSET)
+    public ResponseEntity<RestResponse> login(
+            @PathVariable Long companyId,
+            @RequestBody AuthRM auth
+    ) {
+		
+		if ("".equals(auth.getUsername()) || "".equals(auth.getPassword())) {
+            // invalid paramaters
+            throw new ApplicationException(RestStatus.INVALID_PARAMETER);
+        } 
+		else {
+            Users userLogin = userService.getUserByEmail(auth.getUsername(), companyId, Constant.USER_STATUS.ACTIVE.getStatus());
+
+            if (userLogin != null) {
+//                String passwordHash = null;
+//                try {
+//                    passwordHash = MD5Hash.MD5Encrypt(authRequestModel.getPassword() + userLogin.getSalt());
+//                } catch (NoSuchAlgorithmException ex) {
+//                    throw new RuntimeException("User login encrypt password error", ex);
+//                }
+            	
+//            	String passwordEncoded = bCryptPasswordEncoder.encode(auth.getPassword());
+
+                if (bCryptPasswordEncoder.matches(auth.getPassword(), userLogin.getPasswordHash()) ){
+                    UsersTokens userToken = authService.createUserToken(userLogin, auth.isKeepMeLogin());
+                    // Create Auth User -> Set to filter config
+                    // Perform the security
+                    Authentication authentication = new UsernamePasswordAuthenticationToken(
+                            userLogin.getEmail(),
+                            userLogin.getPasswordHash()
+                    );
+                    //final Authentication authentication = authenticationManager.authenticate();
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    return responseUtil.successResponse(userToken.getToken());
+                } else {
+                    // wrong password
+                    throw new ApplicationException(RestStatus.ERR_USER_NOT_VALID);
+                }
+
+            } else {
+                // can't find user by email address in database
+                throw new ApplicationException(RestStatus.ERR_USER_NOT_EXIST);
+            }
+        }
+		
+	}
+	
 }
