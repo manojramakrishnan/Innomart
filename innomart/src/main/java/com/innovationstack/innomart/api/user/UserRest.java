@@ -232,14 +232,7 @@ public class UserRest extends AbstractBaseController {
             Users userLogin = userService.getUserByEmail(auth.getUsername(), companyId, Constant.USER_STATUS.ACTIVE.getStatus());
 
             if (userLogin != null) {
-//                String passwordHash = null;
-//                try {
-//                    passwordHash = MD5Hash.MD5Encrypt(authRequestModel.getPassword() + userLogin.getSalt());
-//                } catch (NoSuchAlgorithmException ex) {
-//                    throw new RuntimeException("User login encrypt password error", ex);
-//                }
-            	
-//            	String passwordEncoded = bCryptPasswordEncoder.encode(auth.getPassword());
+
 
                 if (bCryptPasswordEncoder.matches(auth.getPassword(), userLogin.getPasswordHash()) ){
                     UsersTokens userToken = authService.createUserToken(userLogin, auth.isKeepMeLogin());
