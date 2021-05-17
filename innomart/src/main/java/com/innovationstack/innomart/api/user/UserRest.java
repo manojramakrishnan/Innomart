@@ -27,6 +27,7 @@ import com.innovationstack.innomart.api.controller.AbstractBaseController;
 import com.innovationstack.innomart.api.email.request.MailRequest;
 import com.innovationstack.innomart.api.email.service.EmailService;
 import com.innovationstack.innomart.api.request.model.AuthRM;
+import com.innovationstack.innomart.api.request.model.UserChangePasswordRM;
 import com.innovationstack.innomart.api.request.model.UserRM;
 import com.innovationstack.innomart.api.response.model.RestResponse;
 import com.innovationstack.innomart.api.response.model.UserDetailRM;
@@ -274,13 +275,51 @@ public class UserRest extends AbstractBaseController {
 		
 		else {
 			throw new ApplicationException(RestStatus.ERR_UNAUTHORIZED);
+		
+		}
+	}
+
+		
+	
+	@RequestMapping(path = Mappings.CHANGE_PASSWORD_USER, method = RequestMethod.POST, produces = Mappings.CHARSET)	
+	public ResponseEntity<RestResponse> changeUserPassword(@PathVariable Long companyId, @RequestBody UserChangePasswordRM user){
+		Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(user.getId(),companyId,
+			 Constant.STATUS.ACTIVE_STATUS.getValue());
+		if(existingUser != null) {
+			String OldPassword=user.getOldPassword();
+			
+		
+		if(bCryptPasswordEncoder.matches(OldPassword, existingUser.getPasswordHash())) {
+			
+			if(user.getNewPassword()!=null || !user.getNewPassword().isEmpty()) {
+				
+		
+			existingUser.setPasswordHash(bCryptPasswordEncoder.encode(user.getNewPassword()));
+			userService.save(existingUser);
+			return responseUtil.successResponse(existingUser);	
+			
+			}
+			else {
+				throw new ApplicationException(RestStatus.ERR_UNCORRECT_PASSWORD);
+				
+			}
+			
+			}
+		else {
+			throw new ApplicationException(RestStatus.ERR_MISSING_PASSWORD);
 		}
 		
-		
-		
-		
-		
+		}
+		else {
+			throw new ApplicationException(RestStatus.ERR_USER_NOT_FOUND);
+		}
 	
-	}
+	}	
 	
+
 }
+	
+	
+	
+	
+	
