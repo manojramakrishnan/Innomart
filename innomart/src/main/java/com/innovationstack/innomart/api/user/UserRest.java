@@ -38,11 +38,13 @@ import com.innovationstack.innomart.model.Users;
 import com.innovationstack.innomart.model.UsersTokens;
 import com.innovationstack.innomart.service.UserAddressService;
 import com.innovationstack.innomart.service.UserService;
+import com.innovationstack.innomart.service.UserTokenService;
 import com.innovationstack.innomart.util.Constant;
 
 @RestController
 @RequestMapping(Mappings.Users)
 public class UserRest extends AbstractBaseController {
+	private static final String String = null;
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -56,6 +58,9 @@ public class UserRest extends AbstractBaseController {
 	
 	@Autowired
 	private AuthService authService;
+	
+	@Autowired
+	private UserTokenService userTokenService;
 
 	@RequestMapping(path = Mappings.USER_REGISTER, method = RequestMethod.POST, produces = Mappings.CHARSET)
 	public ResponseEntity<RestResponse> register(@PathVariable Long companyId, @RequestBody UserRM user) {
@@ -256,6 +261,26 @@ public class UserRest extends AbstractBaseController {
             }
         }
 		
+	}
+	@RequestMapping(path = Mappings.USERS_LOGOUT, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse> logout( @PathVariable Long companyId, HttpServletRequest request  ) {
+		
+		String AuthToken = request.getHeader(Constant.HEADER_TOKEN);
+		UsersTokens usersTokens = userTokenService.getTokenID(AuthToken);
+		if (usersTokens !=null) {
+			userTokenService.invalidateToken(usersTokens);
+	       return responseUtil.successResponse(RestStatus.OK);
+		}
+		
+		else {
+			throw new ApplicationException(RestStatus.ERR_UNAUTHORIZED);
+		}
+		
+		
+		
+		
+		
+	
 	}
 	
 }

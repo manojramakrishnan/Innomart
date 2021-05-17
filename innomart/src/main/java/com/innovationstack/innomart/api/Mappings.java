@@ -16,5 +16,6 @@ public class Mappings {
 	public static final String APPROVE_REGISTERED_USERS = "/approve"; 
 	
 	public static final String USERS_LOGIN = "/login";
+	public static final String USERS_LOGOUT = "/logout";
 
 }
