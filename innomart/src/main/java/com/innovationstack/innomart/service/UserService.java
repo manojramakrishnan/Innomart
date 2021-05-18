@@ -69,6 +69,14 @@ public class UserService {
 		//return deleteUser;
 		
 	}
+	@Transactional
+	public Users updatePassword(Users existingUser) {
+		Users updateUserPassword=entityManager.find(Users.class, existingUser.getId());
+		updateUserPassword.setPasswordHash(existingUser.getPasswordHash());
+		entityManager.merge(updateUserPassword);
+		return updateUserPassword;
+		
+	}
 	
 	
 	

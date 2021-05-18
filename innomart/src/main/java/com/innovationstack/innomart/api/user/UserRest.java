@@ -284,7 +284,7 @@ public class UserRest extends AbstractBaseController {
 	@RequestMapping(path = Mappings.CHANGE_PASSWORD_USER, method = RequestMethod.POST, produces = Mappings.CHARSET)	
 	public ResponseEntity<RestResponse> changeUserPassword(@PathVariable Long companyId, @RequestBody UserChangePasswordRM user){
 		Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(user.getId(),companyId,
-			 Constant.STATUS.ACTIVE_STATUS.getValue());
+			 Constant.USER_STATUS.ACTIVE.getStatus());
 		if(existingUser != null) {
 			String OldPassword=user.getOldPassword();
 			
@@ -295,7 +295,7 @@ public class UserRest extends AbstractBaseController {
 				
 		
 			existingUser.setPasswordHash(bCryptPasswordEncoder.encode(user.getNewPassword()));
-			userService.save(existingUser);
+			userService.updatePassword(existingUser);
 			return responseUtil.successResponse(existingUser);	
 			
 			}

@@ -3,36 +3,50 @@ package com.innovationstack.innomart.api.request.model;
 public class UserChangePasswordRM {
 	
 	
-	private String Id;
-	private String OldPassword;
-	private String NewPassword;
-	public UserChangePasswordRM(String id, String oldPassword, String newPassword) {
+	private int id;
+	
+	private String oldPassword;
+	
+	private String newPassword;
+
+	public UserChangePasswordRM(int id, String oldPassword, String newPassword) {
 		super();
-		Id = id;
-		OldPassword = oldPassword;
-		NewPassword = newPassword;
+		this.id = id;
+		this.oldPassword = oldPassword;
+		this.newPassword = newPassword;
 	}
+	
+	public UserChangePasswordRM() {}
+
 	@Override
 	public String toString() {
-		return "UserChangePasswordRM [Id=" + Id + ", OldPassword=" + OldPassword + ", NewPassword=" + NewPassword + "]";
+		return "UserChangePasswordRM [id=" + id + ", oldPassword=" + oldPassword + ", newPassword=" + newPassword + "]";
 	}
-	public String getId() {
-		return Id;
+
+	public int getId() {
+		return id;
 	}
-	public void setId(String id) {
-		Id = id;
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
 	public String getOldPassword() {
-		return OldPassword;
+		return oldPassword;
 	}
+
 	public void setOldPassword(String oldPassword) {
-		OldPassword = oldPassword;
+		this.oldPassword = oldPassword;
 	}
+
 	public String getNewPassword() {
-		return NewPassword;
+		return newPassword;
 	}
+
 	public void setNewPassword(String newPassword) {
-		NewPassword = newPassword;
+		this.newPassword = newPassword;
 	}
+	
+	
 
 }
