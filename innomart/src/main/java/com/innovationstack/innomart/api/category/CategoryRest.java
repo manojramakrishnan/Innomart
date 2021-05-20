@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.innovationstack.innomart.api.Mappings;
@@ -50,7 +51,7 @@ public class CategoryRest extends AbstractBaseController {
 
 	}
 	@RequestMapping(path = Mappings.UPDATE_CATEGORY, method = RequestMethod.POST, produces = Mappings.CHARSET)
-	public ResponseEntity<RestResponse>updateCAtegory(@PathVariable Long companyId, @RequestBody CategoryRM category) {
+	public ResponseEntity<RestResponse>updateCategory(@PathVariable Long companyId, @RequestBody CategoryRM category) {
 		Categories update = categoryService.findByCategoryId(category.getCategoryId());
 		if(category != null) {
 			update.setCompanyId(category.getCompanyId());
@@ -58,11 +59,23 @@ public class CategoryRest extends AbstractBaseController {
 			update.setId(category.getCategoryId());
 			update.setName(category.getAppName());
 			update.setParentId(category.getParentId());
+			
 			categoryService.update(update);
 			
 		}
 		return responseUtil.successResponse(update);
+
+	}
+
+	@RequestMapping(path = Mappings.DELETE_CATEGORY, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse> deleteCategory( @PathVariable Long companyId,@RequestParam List<Integer> categoryIds){
+		for(Integer categoryId : categoryIds) {
+			Categories delete = categoryService.deleteCategoryByCompanyId(companyId,categoryId,Constant.CATEGORY_STATUS.INACTIVE.getStatus());
+			return responseUtil.successResponse(delete);
+		}
 		
 	
-	}
+			
+	}		
+
 }

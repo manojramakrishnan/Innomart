@@ -43,5 +43,15 @@ public class CategoryDAO {
 		// TODO Auto-generated method stub
 		return categoryRepository.findBYCategoryId(categoryId);
 	}
+
+
+
+
+
+
+	public Categories deleteCategoryByCompanyId(Long companyId, Integer categoryId, int status) {
+		// TODO Auto-generated method stub
+		return  categoryRepository.findByCompanyId(companyId,categoryId,status);
+	}
 	
 }

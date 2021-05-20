@@ -64,6 +64,15 @@ public class CategoryService {
 		return updateCategory;
 	}
 
+
+
+
+
+	public Categories deleteCategoryByCompanyId(Long companyId, Integer categoryId, int status) {
+		// TODO Auto-generated method stub
+		return categoryDAO.deleteCategoryByCompanyId(companyId, categoryId, status);
+	}
+
 	
 	
 }
