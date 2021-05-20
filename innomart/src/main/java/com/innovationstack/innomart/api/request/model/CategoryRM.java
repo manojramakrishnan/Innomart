@@ -2,13 +2,13 @@ package com.innovationstack.innomart.api.request.model;
 
 public class CategoryRM {
 
-	private String categoryId;
-	private String companyId;
+	private Integer categoryId;
+	private Long companyId;
 	private Integer parentId;
 	private String appName;
 	private String status;
 	private String description;
-	public CategoryRM(String categoryId, String companyId, Integer parentId, String appName, String status,
+	public CategoryRM(Integer categoryId, Long companyId, Integer parentId, String appName, String status,
 			String description) {
 		super();
 		this.categoryId = categoryId;
@@ -23,16 +23,16 @@ public class CategoryRM {
 		return "CategoryRM [categoryId=" + categoryId + ", companyId=" + companyId + ", parentId=" + parentId
 				+ ", appName=" + appName + ", status=" + status + ", description=" + description + "]";
 	}
-	public String getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
-	public String getCompanyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
 	public Integer getParentId() {

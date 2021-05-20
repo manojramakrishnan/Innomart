@@ -22,6 +22,8 @@ public class Mappings {
 	
 	public static final String Category= VERSION + "/category";
 	public static final String ADD_CATEGORY = "/addCategory";
+	public static final String GET_CATEGORY = "/getCategory";
+	public static final String UPDATE_CATEGORY = "/updateCategory";
 	
 	
 }

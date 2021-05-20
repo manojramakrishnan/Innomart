@@ -1,5 +1,7 @@
 package com.innovationstack.innomart.api.category;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,4 +43,26 @@ public class CategoryRest extends AbstractBaseController {
 
 	}
 
+	@RequestMapping(path = Mappings.GET_CATEGORY, method = RequestMethod.GET, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse> getCategoryList(@PathVariable Long companyId) {
+	List<Categories>  list= categoryService.getCategoryByCompanyId(companyId);
+		return responseUtil.successResponse(list);
+
+	}
+	@RequestMapping(path = Mappings.UPDATE_CATEGORY, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse>updateCAtegory(@PathVariable Long companyId, @RequestBody CategoryRM category) {
+		Categories update = categoryService.findByCategoryId(category.getCategoryId());
+		if(category != null) {
+			update.setCompanyId(category.getCompanyId());
+			update.setDescription(category.getDescription());
+			update.setId(category.getCategoryId());
+			update.setName(category.getAppName());
+			update.setParentId(category.getParentId());
+			categoryService.update(update);
+			
+		}
+		return responseUtil.successResponse(update);
+		
+	
+	}
 }
