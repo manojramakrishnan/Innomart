@@ -19,5 +19,9 @@ public class Mappings {
 	public static final String USERS_LOGOUT = "/logout";
  
 	public static final String CHANGE_PASSWORD_USER = "/changePassword";
-
+	
+	public static final String Category= VERSION + "/category";
+	public static final String ADD_CATEGORY = "/addCategory";
+	
+	
 }

@@ -19,7 +19,7 @@ public class Categories {
 	@Column(name = "category_id")
 	private Integer id;
 	@Column(name="company_id",nullable=false)
-	private Integer companyId;
+	private Long companyId;
 	@Column(name="parentid",nullable=false)
 	private Integer parentId;
 	@Column(name="appname",nullable=false)
@@ -35,11 +35,11 @@ public class Categories {
 		this.id = id;
 	}
 
-	public Integer getCompanyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
 
-	public void setCompanyId(Integer companyId) {
+	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
 
@@ -78,7 +78,7 @@ public class Categories {
 	@Column(name="description",nullable=false)
 	private String description;
 	
-	public Categories(Integer id, Integer companyId, Integer parentId, String appName, Integer status,
+	public Categories(Integer id, Long companyId, Integer parentId, String appName, Integer status,
 			String description) {
 		super();
 		this.id = id;

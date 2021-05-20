@@ -67,6 +67,24 @@ public class Constant {
 		}
 	}
 
+	public static enum CATEGORY_STATUS {
+		INACTIVE(-1), PENDING(0), ACTIVE(1);
+
+		private final int status;
+
+		private CATEGORY_STATUS(int status) {
+			this.status = status;
+		}
+
+		public int getStatus() {
+			return status;
+		}
+	}
+	
+	
+	
+	
+	
 	public static enum USER_ROLE {
 		SYS_ADMIN(1, "System Admin"), STORE_ADMIN(2, "Store Admin"), STORE_MANAGER(3, "Store Manager"),
 		NORMAL_USER(4, "Normal User"), GUEST(5, "Guest");

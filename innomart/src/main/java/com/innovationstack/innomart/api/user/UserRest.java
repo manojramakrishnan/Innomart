@@ -287,13 +287,17 @@ public class UserRest extends AbstractBaseController {
 			 Constant.USER_STATUS.ACTIVE.getStatus());
 		if(existingUser != null) {
 			String OldPassword=user.getOldPassword();
+			System.err.println("first if");
 			
 		
 		if(bCryptPasswordEncoder.matches(OldPassword, existingUser.getPasswordHash())) {
 			
-			if(user.getNewPassword()!=null || !user.getNewPassword().isEmpty()) {
+			System.err.println("second if");
+			
+			if(user.getNewPassword() != null || !user.getNewPassword().isEmpty()) {
 				
-		
+				System.err.println("third if");
+				
 			existingUser.setPasswordHash(bCryptPasswordEncoder.encode(user.getNewPassword()));
 			userService.updatePassword(existingUser);
 			return responseUtil.successResponse(existingUser);	
