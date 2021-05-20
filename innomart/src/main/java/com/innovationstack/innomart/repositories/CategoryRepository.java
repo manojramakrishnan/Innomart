@@ -21,4 +21,6 @@ public interface CategoryRepository extends JpaRepository<Categories, Integer> {
 	Categories findByCompanyId(Long companyId, Integer categoryId, int status);
 
 
+
+
 }

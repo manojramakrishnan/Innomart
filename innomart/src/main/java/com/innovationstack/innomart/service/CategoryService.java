@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.innovationstack.innomart.dao.CategoryDAO;
 import com.innovationstack.innomart.model.Categories;
+import com.innovationstack.innomart.model.Users;
 
 @Service("categoryService")
 public class CategoryService {
@@ -64,13 +65,23 @@ public class CategoryService {
 		return updateCategory;
 	}
 
+	@Transactional
+	public void delete(Users existingUser) {
+		Users deleteUser=entityManager.find(Users.class, existingUser.getId());
+		deleteUser.setStatus(existingUser.getStatus());
+		
+		entityManager.merge(deleteUser);
+		//return deleteUser;
+		
+	}
 
 
-
-
+	@Transactional
 	public Categories deleteCategoryByCompanyId(Long companyId, Integer categoryId, int status) {
 		// TODO Auto-generated method stub
-		return categoryDAO.deleteCategoryByCompanyId(companyId, categoryId, status);
+		Categories updatedCategory = entityManager.find(Categories.class, categoryId);
+		updatedCategory.setStatus(status);
+		return updatedCategory;
 	}
 
 	

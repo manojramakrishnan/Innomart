@@ -69,12 +69,13 @@ public class CategoryRest extends AbstractBaseController {
 
 	@RequestMapping(path = Mappings.DELETE_CATEGORY, method = RequestMethod.POST, produces = Mappings.CHARSET)
 	public ResponseEntity<RestResponse> deleteCategory( @PathVariable Long companyId,@RequestParam List<Integer> categoryIds){
+		Categories delete = new Categories();
 		for(Integer categoryId : categoryIds) {
-			Categories delete = categoryService.deleteCategoryByCompanyId(companyId,categoryId,Constant.CATEGORY_STATUS.INACTIVE.getStatus());
-			return responseUtil.successResponse(delete);
+			delete = categoryService.deleteCategoryByCompanyId(companyId,categoryId,Constant.CATEGORY_STATUS.INACTIVE.getStatus());
+			
 		}
 		
-	
+		return responseUtil.successResponse(delete);
 			
 	}		
 
