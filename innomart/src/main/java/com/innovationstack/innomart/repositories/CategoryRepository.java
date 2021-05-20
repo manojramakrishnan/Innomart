@@ -14,7 +14,7 @@ public interface CategoryRepository extends JpaRepository<Categories, Integer> {
 	@Query("SELECT c FROM Categories c WHERE  c.companyId = :companyId")
 	  List<Categories>  findByCompanyId(Long companyId);
 
-	@Query("SELECT c FROM Categories c WHERE  c.categoryId = :categoryId")
+	@Query("SELECT c FROM Categories c WHERE  c.id = :categoryId")
 	Categories findBYCategoryId(int categoryId);
 
 
