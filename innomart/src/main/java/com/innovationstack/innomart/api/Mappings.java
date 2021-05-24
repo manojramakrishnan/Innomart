@@ -26,5 +26,11 @@ public class Mappings {
 	public static final String UPDATE_CATEGORY = "/updateCategory";
 	public static final String DELETE_CATEGORY = "/deleteCategory";
 	
+	public static final String Company= VERSION+ "/company";
+	public static final String GET_ALL_COMPANIES = "/allCompanies";
+	
+	
+	public static final String GET_COMPANY_BY_ID = "/byId";
+	
 	
 }
