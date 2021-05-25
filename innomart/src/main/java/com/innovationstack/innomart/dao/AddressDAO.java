@@ -19,5 +19,9 @@ public class AddressDAO {
 		// TODO Auto-generated method stub
 		return addressRepository.getAddressForUserId(userId);
 	}
+	public Address getAddressByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return addressRepository.getAddressByUserId(userId);
+	}
 
 }

@@ -11,6 +11,9 @@ public interface AddressRepository extends JpaRepository<Address,Integer> {
 	
 	@Query("SELECT a FROM Address a where a.userId= :userId")
 	Address getAddressForUserId(int userId);
+	
+	@Query("SELECT a FROM Address a where a.userId= :userId")
+	Address getAddressByUserId(String userId);
 
 
 

@@ -80,8 +80,19 @@ public class Constant {
 			return status;
 		}
 	}
-	
-	
+	public static enum ORDER_STATUS {
+		INACTIVE(-1), PENDING(0), ACTIVE(1);
+
+		private final int status;
+
+		private ORDER_STATUS(int status) {
+			this.status = status;
+		}
+
+		public int getStatus() {
+			return status;
+		}
+	}
 	
 	
 	

@@ -20,6 +20,10 @@ public class UserAddressService {
 		// TODO Auto-generated method stub
 		return addressDAO.getAddressDetails(userId);
 	}
+	public Address getAddressByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return addressDAO.getAddressByUserId(userId);
+	}
 	
 	
 
