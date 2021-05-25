@@ -1,5 +1,7 @@
 package com.innovationstack.innomart.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,4 +20,10 @@ public class OrderDAO {
 		// TODO Auto-generated method stub
 		return orderRepository.save(orders);
 	}
+
+
+		public List<Orders> getOrderByCompanyId(Long companyId) {
+			// TODO Auto-generated method stub
+			return orderRepository.getOrderByCompanyId(companyId);
+		}
 }

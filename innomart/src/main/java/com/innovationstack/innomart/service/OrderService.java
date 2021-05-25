@@ -1,5 +1,7 @@
 package com.innovationstack.innomart.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +25,19 @@ public class OrderService {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+
+
+	public List<Orders> getOrderByCompanyId(Long companyId) {
+		// TODO Auto-generated method stub
+		return orderDAO.getOrderByCompanyId(companyId);
+	}
+
+
+
+
+
+	
 }

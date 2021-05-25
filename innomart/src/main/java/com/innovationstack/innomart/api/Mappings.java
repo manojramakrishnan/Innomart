@@ -32,6 +32,7 @@ public class Mappings {
 	
 	public static final String Order= VERSION+ "/order";
 	public static final String ADD_ORDER = "/addOrder";
+	public static final String GET_ORDER_BY_COMPANY_ID = "/getOrder";
 	
 	
 }

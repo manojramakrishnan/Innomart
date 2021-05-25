@@ -1,6 +1,7 @@
 package com.innovationstack.innomart.api.order;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import com.innovationstack.innomart.api.controller.AbstractBaseController;
 import com.innovationstack.innomart.api.request.model.OrderRM;
 import com.innovationstack.innomart.api.response.model.RestResponse;
 import com.innovationstack.innomart.model.Address;
+import com.innovationstack.innomart.model.Categories;
 import com.innovationstack.innomart.model.Orders;
 import com.innovationstack.innomart.service.OrderService;
 import com.innovationstack.innomart.service.UserAddressService;
@@ -64,5 +66,11 @@ public class OrderRest extends AbstractBaseController{
 		return responseUtil.successResponse(orders);
 
 
+	}
+
+	@RequestMapping(path = Mappings.GET_ORDER_BY_COMPANY_ID, method = RequestMethod.GET, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse> getOrderByCompanyId(@PathVariable Long companyId) {
+	List<Orders>  list= orderService.getOrderByCompanyId(companyId);
+		return responseUtil.successResponse(list);
 	}
 }
