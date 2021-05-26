@@ -1,14 +1,17 @@
 package com.innovationstack.innomart.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
-public class ProductCategoryId {
+@Embeddable
+public class ProductCategoryId implements Serializable{
 
-	@Id
+//	@Id
 	private long productId;
-	@Id
+//	@Id
 	private long categoryId;
 	public ProductCategoryId(long productId, long categoryId) {
 		super();
