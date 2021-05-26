@@ -9,41 +9,34 @@ import javax.persistence.Id;
 @Entity
 public class ProductCategories {
 	
-	@Override
-	public String toString() {
-		return "ProductCategories [id=" + id + ", categoryId=" + categoryId + "]";
+	
+	private ProductCategoryId id;
+	
+	
+	public ProductCategories(ProductCategoryId id) {
+		super();
+		this.id = id;
 	}
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "productcategories_id")
-	private Integer id;
-	@Column(name="category_id",nullable=false)
-	private Integer categoryId;
-	
+
+	@Override
+	public String toString() {
+		return "ProductCategories [id=" + id + "]";
+	}
+
+
+	public ProductCategoryId getId() {
+		return id;
+	}
+
+
+	public void setId(ProductCategoryId id) {
+		this.id = id;
+	}
+
+
 	public ProductCategories() {
 		
 	}
 
-	public Integer getId() {
-		return id;
 	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Integer getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public ProductCategories(Integer id, Integer categoryId) {
-		super();
-		this.id = id;
-		this.categoryId = categoryId;
-	}
-}
