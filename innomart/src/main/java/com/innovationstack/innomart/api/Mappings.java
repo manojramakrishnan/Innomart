@@ -36,6 +36,8 @@ public class Mappings {
 
 	public static final String Product= VERSION+ "/product";
 	public static final String CREATE_PRODUCT = "/createProduct";
+	public static final String GET_ALL_PRODUCTS = "/allProducts";
+	public static final String GET_PRODUCT_BY_ID = "/getById";
 	
 	
 }

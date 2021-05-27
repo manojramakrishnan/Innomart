@@ -10,10 +10,10 @@ import javax.persistence.Id;
 public class ProductCategoryId implements Serializable{
 
 //	@Id
-	private long productId;
+	private Long productId;
 //	@Id
-	private long categoryId;
-	public ProductCategoryId(long productId, long categoryId) {
+	private Long categoryId;
+	public ProductCategoryId(Long productId, Long categoryId) {
 		super();
 		this.productId = productId;
 		this.categoryId = categoryId;
@@ -22,16 +22,16 @@ public class ProductCategoryId implements Serializable{
 	public String toString() {
 		return "ProductCategoryId [productId=" + productId + ", categoryId=" + categoryId + "]";
 	}
-	public long getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
-	public void setProductId(long productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
-	public long getCategoryId() {
+	public Long getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(long categoryId) {
+	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
 		public ProductCategoryId() {

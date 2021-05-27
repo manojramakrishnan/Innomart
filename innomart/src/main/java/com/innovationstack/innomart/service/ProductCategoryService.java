@@ -1,5 +1,7 @@
 package com.innovationstack.innomart.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class ProductCategoryService {
 	public void save(ProductCategories productCategories) {
 		// TODO Auto-generated method stub
 		productCategoryDAO.saveProductCategories(productCategories);
+	}
+
+	public List<ProductCategories> getProductCategoryByProductId(int productId) {
+		// TODO Auto-generated method stub
+		return productCategoryDAO.getProductCategoyByProductId(productId);
 	}
 
 }
