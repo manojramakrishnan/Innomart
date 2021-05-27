@@ -11,7 +11,7 @@ import com.innovationstack.innomart.model.ProductCategories;
 @Repository("productCategoryRepository")
 public interface ProductCategoryRepository extends JpaRepository<ProductCategories, Integer>{
 	
-	@Query("SELECT r FROM ProductCategories r WHERE  r.productId = :productId")
+	@Query("SELECT r FROM ProductCategories r WHERE  r.id = :productId")
 	List<ProductCategories> getProductCategoryByproductId(int productId);
 
 }

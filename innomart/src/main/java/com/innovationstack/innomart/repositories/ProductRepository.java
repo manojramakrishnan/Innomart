@@ -15,7 +15,7 @@ public interface ProductRepository extends JpaRepository<Products, Integer> {
 	@Query("SELECT p FROM Products p WHERE  p.companyId = :companyId")
 	List<Products> getAllProductsByCompanyId(Long companyId);
 	
-	@Query("SELECT p FROM Products p WHERE p.companyId = :companyId And p.productId = :productId")
+	@Query("SELECT p FROM Products p WHERE p.companyId = :companyId And p.id = :productId")
 	Products getProductById(Long companyId, int productId);
 
 
