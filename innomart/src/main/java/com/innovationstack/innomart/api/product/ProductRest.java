@@ -119,6 +119,54 @@ public class ProductRest extends AbstractBaseController{
 			throw new ApplicationException(RestStatus.GET_PRODUCT_ERROR);
 		}
 	}
-	
+	@RequestMapping(path = Mappings.UPDATE_PRODUCT, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse>updateProduct(@RequestBody ProductRM product) {
+		Date createDate = new Date();
+		try {
+			String productId= product.getProductId().toString();
+			String companyId= product.getCompanyId().toString();
+			Products products = productService.getProductById(Long.parseLong(companyId),Integer.parseInt(productId));
+		if(products != null) {
+			products.setBrowsingName(product.getBrowsingName());
+			products.setCompanyId(product.getCompanyId());
+			products.setCreatedOn(createDate);
+			products.setDefaultImage(product.getDefaultImage());
+			products.setDescription(product.getDescription());
+			products.setIsStockControlled(product.getIsStockControlled());
+			products.setListPrice(product.getListPrice());
+			products.setOverview(product.getOverview());
+			products.setProductName(product.getProductName());
+			products.setProductRank(product.getProductRank());
+			products.setQuantity(product.getQuantity());
+			products.setSalePrice(product.getSalePrice());
+			products.setSku(product.getSku());
+			products.setUpdatedOn(createDate);
+			
+			productService.update(products);
+			List<ProductCategories> productCategories= productCategoryService.getProductCategoryByProductId(Integer.parseInt(productId));
+		for(ProductCategories result : productCategories) {
+			productCategoryService.delete(result);
+		}
+		
+		for(Long categoriesId : product.getCategoriesId()) {
+			ProductCategoryId productCategoryId = new ProductCategoryId();
+			ProductCategories pC = new ProductCategories();
+			productCategoryId.setCategoryId(categoriesId);
+			String pId= products.getId().toString();
+			productCategoryId.setProductId(Long.parseLong(pId));
+			pC.setId(productCategoryId);
+			productCategoryService.save(pC);	
+		}
+		return responseUtil.successResponse(products);
+		}
+		else {
+			throw new ApplicationException(RestStatus.GET_PRODUCT_ERROR);
+		}
+		
+		}
+		catch (Exception ex) {
+			throw new ApplicationException(RestStatus.UPDATE_PRODUCT_ERROR);
+		}
+	}
 
 }

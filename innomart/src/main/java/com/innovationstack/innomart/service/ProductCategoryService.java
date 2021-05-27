@@ -24,4 +24,9 @@ public class ProductCategoryService {
 		return productCategoryDAO.getProductCategoyByProductId(productId);
 	}
 
+	public void delete(ProductCategories result) {
+		// TODO Auto-generated method stub
+		productCategoryDAO.delete(result);
+	}
+
 }

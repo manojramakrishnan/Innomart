@@ -24,4 +24,12 @@ public class ProductCategoryDAO {
 		return productCategoryRepository.getProductCategoryByproductId(productId);
 	}
 
+	public void delete(ProductCategories result) {
+		// TODO Auto-generated method stub
+		productCategoryRepository.delete(result);
+	}
+
+	
+	
+
 }
