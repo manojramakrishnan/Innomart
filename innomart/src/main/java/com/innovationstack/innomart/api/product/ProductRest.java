@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.innovationstack.innomart.api.Mappings;
@@ -168,5 +169,49 @@ public class ProductRest extends AbstractBaseController{
 			throw new ApplicationException(RestStatus.UPDATE_PRODUCT_ERROR);
 		}
 	}
+	@RequestMapping(path = Mappings.DELETE_PRODUCT, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse>deleteProduct(@PathVariable Long companyId, @RequestParam List<Integer>productIds) {
+		try {
+			for(Integer productId : productIds) {
+				Products products = productService.getProductById(companyId, productId);
+				if(products != null) {
+					products.setStatus(Constant.STATUS.DELETED_STATUS.getValue());
+					productService.update(products);
+					List<ProductCategories> productCategories= productCategoryService.getProductCategoryByProductId(productId);
+					for(ProductCategories result : productCategories) {
+						productCategoryService.delete(result);
+					}
+				}
+			}
+		return responseUtil.successResponse("Product Deleted Successfully");
+		}
+	catch (Exception ex) {
+		throw new ApplicationException(RestStatus.DELETE_PRODUCT_ERROR);
+	}
+	
+	}
+	@RequestMapping(path = Mappings.GET_PRODUCT_BY_CATEGORY_ID, method = RequestMethod.GET, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse>getProductByCategoryId(@PathVariable Long companyId, @RequestParam Long categoryId) {
+		List<Products> products = productService.getProductByCompanyIdAndCategoryId(companyId, categoryId);
+		return responseUtil.successResponse(products);
+		
+	}
+
+	@RequestMapping(path = Mappings.GET_PRODUCT_LIST_BY_ID, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	public ResponseEntity<RestResponse>getProductListById(@PathVariable Long companyId, @RequestParam List<Long> productIds){
+				if(productIds !=null && !productIds.isEmpty()) {
+					List<Products> products = (List<Products>) productService.getProductById(companyId, productIds);
+					if(products != null) {
+						return responseUtil.successResponse(products);
+					}
+					else {
+						throw new ApplicationException(RestStatus.INVALID_PARAMETER);
+					}
+				}
+				else {
+					throw new ApplicationException(RestStatus.INVALID_PARAMETER);
+				}
+	}
+	
 
 }

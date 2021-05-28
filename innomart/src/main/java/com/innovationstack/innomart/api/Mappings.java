@@ -39,6 +39,9 @@ public class Mappings {
 	public static final String GET_ALL_PRODUCTS = "/allProducts";
 	public static final String GET_PRODUCT_BY_ID = "/getById";
 	public static final String UPDATE_PRODUCT = "/upadateProduct";
+	public static final String DELETE_PRODUCT = "/deleteProduct";
+	public static final String GET_PRODUCT_BY_CATEGORY_ID = "/byCategoryId";
+	public static final String GET_PRODUCT_LIST_BY_ID = "/listById";
 	
 	
 }

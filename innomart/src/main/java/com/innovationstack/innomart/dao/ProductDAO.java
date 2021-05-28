@@ -30,6 +30,17 @@ public class ProductDAO {
 		return productRepository.getProductById(companyId,productId);
 	}
 
+	public List<Products> getProductByCompanyIdAndCategoryId(Long companyId, Long categoryId) {
+		// TODO Auto-generated method stub
+		return productRepository.getProductByCompanyIdAndCategoryId(companyId,categoryId);
+	}
+
+	public Iterable<Products> getProductById(Long companyId, List<Long> productIds) {
+		// TODO Auto-generated method stub
+		return productRepository.getProductById(companyId, productIds);
+		
+	}
+
 
 
 

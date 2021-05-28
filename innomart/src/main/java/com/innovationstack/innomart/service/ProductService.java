@@ -63,4 +63,14 @@ public class ProductService {
 		
 		
 	}
+
+	public List<Products> getProductByCompanyIdAndCategoryId(Long companyId, Long categoryId) {
+		// TODO Auto-generated method stub
+		return productDAO.getProductByCompanyIdAndCategoryId(companyId,categoryId);
+	}
+
+	public Iterable<Products> getProductById(Long companyId, List<Long> productIds) {
+		// TODO Auto-generated method stub
+		return productDAO.getProductById(companyId,productIds);
+	}
 }
