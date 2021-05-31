@@ -14,7 +14,7 @@ public class RolesDAO {
 
 	public Roles findById(Integer id) {
 		// TODO Auto-generated method stub
-		return rolesRepository.findByRoleId(id);
+		return rolesRepository.retrieveRoleData(id);
 	}
 
 }

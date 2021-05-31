@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 import com.innovationstack.innomart.dao.UserDAO;
 import com.innovationstack.innomart.model.Roles;
 import com.innovationstack.innomart.model.Users;
+import com.innovationstack.innomart.util.Constant;
 
 @Service("userService")
 public class UserService {
+	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
@@ -44,7 +46,7 @@ public class UserService {
 	@Transactional
 	public Users save(Users signUp) {
 		signUp.setPasswordHash(bCryptPasswordEncoder.encode(signUp.getPasswordHash()));
-		Roles userRole= rolesService.findById(signUp.getRole().getId());
+		Roles userRole= rolesService.findById(Constant.USER_ROLE.SYS_ADMIN.getRoleId());
 		signUp.setRoles(new HashSet<Roles>(Arrays.asList(userRole)) );
 		signUp.setRole(userRole);
 		Users userAdd= userDAO.registerUser(signUp);

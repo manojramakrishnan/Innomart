@@ -9,7 +9,7 @@ import com.innovationstack.innomart.model.Roles;
 @Repository("roleRepository")
 public interface RoleRepository extends JpaRepository<Roles, Integer> {
 
-	@Query("SELECT u.roleName from Roles u WHERE u.id= :roleId")
+	@Query("SELECT u.role from Roles u WHERE u.id= :roleId")
 	String findRoleByRoleId(int roleId);
 	
 	

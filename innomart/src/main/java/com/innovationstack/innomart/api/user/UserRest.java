@@ -166,7 +166,7 @@ public class UserRest extends AbstractBaseController {
 	@RequestMapping(path = Mappings.UPDATE_USER, method = RequestMethod.POST, produces = Mappings.CHARSET)
 	public ResponseEntity<RestResponse> updateUser(@PathVariable Long companyId, @RequestBody UserRM user) {
 		Users existingUser = userService.getUserByUserIdAndCompanyIdAndStatus(Integer.parseInt(user.getUserId()),
-				companyId, Constant.STATUS.ACTIVE_STATUS.getValue());
+				companyId, Constant.USER_STATUS.ACTIVE.getStatus());
 		if (existingUser != null) {
 			existingUser.setFirstName(user.getFirstName());
 			existingUser.setMiddleName(user.getMiddleName());
