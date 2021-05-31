@@ -88,7 +88,7 @@ public class UserRest extends AbstractBaseController {
 				signUp.setStatus(Constant.USER_STATUS.PENDING.getStatus());
 				signUp.setPasswordHash(user.getPassword());
 				signUp.setGroupId(user.getGroupId());
-				signUp.setRoleId(Constant.USER_ROLE.NORMAL_USER.getRoleId());
+			
 				signUp.setCreateDate(new Date());
 				Address address = new Address();
 				address.setAddress(user.getAddress());
@@ -141,7 +141,7 @@ public class UserRest extends AbstractBaseController {
 				UserDetailRM response = new UserDetailRM();
 				response.setCompanyId(companyId);
 				response.setUserId(userId);
-				response.setRoleId(existingUser.getRoleId());
+				response.setRoleId(existingUser.getRole().getId());
 				response.setFirstName(existingUser.getFirstName());
 				response.setMiddleName(existingUser.getMiddleName());
 				response.setLastName(existingUser.getLastName());

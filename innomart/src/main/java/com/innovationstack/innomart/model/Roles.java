@@ -10,17 +10,16 @@ import javax.persistence.Id;
 public class Roles {
 	@Override
 	public String toString() {
-		return "Roles [id=" + id + ", roleName=" + roleName + ", description=" + description + "]";
+		return "Roles [id=" + id + ", role=" + role + " ]";
 	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "roles_id")
 	private Integer id;
-	@Column(name="rolename",nullable=false)
-	private String roleName;
-	@Column(name="description",nullable=false)
-	private String description;
+	@Column(name="role",nullable=false)
+	private String role;
+
 	
 	public Roles () {
 		
@@ -34,27 +33,20 @@ public class Roles {
 		this.id = id;
 	}
 
-	public String getRoleName() {
-		return roleName;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	public String getDescription() {
-		return description;
-	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
-	public Roles(Integer roleId, String roleName, String description) {
+	public Roles(Integer roleId, String role) {
 		super();
 		this.id = roleId;
-		this.roleName = roleName;
-		this.description = description;
-	}
+		this.role = role;
+			}
 
 }

@@ -19,7 +19,7 @@ public class AuthUserFactoryImpl implements AuthUserFactory{
                     user.getId(),
                     user.getEmail(),
                     user.getPasswordHash(),
-                    getUserRoleString(user.getRoleId()),
+                    getUserRoleString(user.getRole().getId()),
                     user.getFirstName(),
                     user.getLastName(),
                     user.getStatus() == Constant.STATUS.ACTIVE_STATUS.getValue()

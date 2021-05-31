@@ -1,5 +1,8 @@
 package com.innovationstack.innomart.service;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -10,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.innovationstack.innomart.dao.UserDAO;
+import com.innovationstack.innomart.model.Roles;
 import com.innovationstack.innomart.model.Users;
 
 @Service("userService")
@@ -19,6 +23,9 @@ public class UserService {
 	@Autowired
 	private UserAddressService userAddressService;
 	private UserDAO userDAO;
+	
+	@Autowired
+	private RolesService rolesService;
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -37,6 +44,9 @@ public class UserService {
 	@Transactional
 	public Users save(Users signUp) {
 		signUp.setPasswordHash(bCryptPasswordEncoder.encode(signUp.getPasswordHash()));
+		Roles userRole= rolesService.findById(signUp.getRole().getId());
+		signUp.setRoles(new HashSet<Roles>(Arrays.asList(userRole)) );
+		signUp.setRole(userRole);
 		Users userAdd= userDAO.registerUser(signUp);
 		userAdd.getAddress().setUserId(userAdd.getId());
 		userAddressService.save(userAdd.getAddress());

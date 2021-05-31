@@ -1,15 +1,18 @@
 package com.innovationstack.innomart.model;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -17,24 +20,24 @@ import javax.persistence.Transient;
 @Entity
 public class Users {
 	
-	@Override
-	public String toString() {
-		return "Users [id=" + id + ", companyId=" + companyId + ", groupId=" + groupId + ", roleId=" + roleId
-				+ ", email=" + email + ", passwordHash=" + passwordHash + ", firstName=" + firstName + ", middleName="
-				+ middleName + ", lastName=" + lastName + ", status=" + status + ", createDate=" + createDate
-				+ ", company=" + company + "]";
-	}
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Integer id;
+	@Override
+	public String toString() {
+		return "Users [id=" + id + ", companyId=" + companyId + ", groupId=" + groupId + ", email=" + email
+				+ ", passwordHash=" + passwordHash + ", firstName=" + firstName + ", middleName=" + middleName
+				+ ", lastName=" + lastName + ", status=" + status + ", createDate=" + createDate + ", address="
+				+ address + ", company=" + company + ", role=" + role + ", roles=" + roles + "]";
+	}
+
 	@Column(name="company_id",nullable=false)
 	private long companyId=0;
 	@Column(name="groupid",nullable=false)
 	private Integer groupId;
-	@Column(name="roles_id",nullable=false)
-	private Integer roleId;
 	@Column(name="email",nullable=false)
 	private String email;
 	@Column(name="passwordhash",nullable=false)
@@ -100,14 +103,10 @@ public class Users {
 		this.groupId = groupId;
 	}
 
-	public Integer getRoleId() {
-		return roleId;
-	}
+	
+	
 
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
-	}
-
+	
 	public String getEmail() {
 		return email;
 	}
@@ -164,15 +163,37 @@ public class Users {
 		this.createDate = createDate;
 	}
 
+	@ManyToOne
+	@JoinColumn
+	private Roles role;
+	
+	public Roles getRole() {
+		return role;
+	}
 
+	public void setRole(Roles role) {
+		this.role = role;
+	}
 
-	public Users(Integer id, Integer companyId, Integer groupId, Integer roleId, String email, String passwordHash,
-			String firstName, String middleName, String lastName, Integer status, Date createDate, Companies company) {
+	public Set<Roles> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Roles> roles) {
+		this.roles = roles;
+	}
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name= "user_roles", joinColumns = @JoinColumn(name= "user_id"), inverseJoinColumns = @JoinColumn(name= "roles_id"))
+	private Set<Roles> roles;
+
+	public Users(Integer id, long companyId, Integer groupId, String email, String passwordHash, String firstName,
+			String middleName, String lastName, Integer status, Date createDate, Address address, Companies company,
+			Roles role, Set<Roles> roles) {
 		super();
 		this.id = id;
 		this.companyId = companyId;
 		this.groupId = groupId;
-		this.roleId = roleId;
 		this.email = email;
 		this.passwordHash = passwordHash;
 		this.firstName = firstName;
@@ -180,7 +201,11 @@ public class Users {
 		this.lastName = lastName;
 		this.status = status;
 		this.createDate = createDate;
+		this.address = address;
 		this.company = company;
+		this.role = role;
+		this.roles = roles;
 	}
-
+	
+	
 }
