@@ -13,7 +13,7 @@ import com.innovationstack.innomart.model.Orders;
 public interface OrderRepository extends JpaRepository<Orders , Integer>{
 
 	@Query("SELECT o FROM Orders o WHERE  o.id = :companyId")
-	List<Orders> getOrderByCompanyId(Long companyId);
+	List<Orders> getOrderByCompanyId(Integer companyId);
 
 
 

@@ -24,6 +24,7 @@ public class OrderDAO {
 
 		public List<Orders> getOrderByCompanyId(Long companyId) {
 			// TODO Auto-generated method stub
-			return orderRepository.getOrderByCompanyId(companyId);
+			String companyIds= companyId.toString();
+			return orderRepository.getOrderByCompanyId(Integer.parseInt(companyIds));
 		}
 }
