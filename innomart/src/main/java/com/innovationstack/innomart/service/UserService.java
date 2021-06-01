@@ -2,6 +2,7 @@ package com.innovationstack.innomart.service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -54,9 +55,9 @@ public class UserService {
 		userAddressService.save(userAdd.getAddress());
 		return userAdd;
 	}
-	public Users doFilterSearchSortPagingUser(Long companyId) {
+	public List<Users> doFilterSearchSortPagingUser(Long companyId) {
 		// TODO Auto-generated method stub
-		return userDAO.findAllUsers(companyId);
+		return userDAO.findUsers(companyId);
 		
 	}
 	public Users getUserByUserIdAndCompanyIdAndStatus(int userId, Long companyId, int status) {

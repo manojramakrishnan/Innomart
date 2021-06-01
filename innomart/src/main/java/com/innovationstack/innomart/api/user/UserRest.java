@@ -124,7 +124,7 @@ public class UserRest extends AbstractBaseController {
 	public ResponseEntity<RestResponse> getUserList(HttpServletRequest request, @PathVariable Long companyId) {
 		try {
 			// String userId= getAuthUserFromSession(request).getId();
-			Users users = userService.doFilterSearchSortPagingUser(companyId);
+			List<Users> users = userService.doFilterSearchSortPagingUser(companyId);
 			return responseUtil.successResponse(users);
 		} catch (Exception e) {
 			throw new ApplicationException(RestStatus.ERR_GET_LIST_USERS);

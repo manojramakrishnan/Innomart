@@ -1,7 +1,8 @@
 package com.innovationstack.innomart.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import com.innovationstack.innomart.model.Users;
@@ -32,10 +33,7 @@ public class UserDAO {
 		
 	}
 
-	public Users findAllUsers( Long companyId) {
-		// TODO Auto-generated method stub
-		return userRepository.findAllByCompanyId(companyId);
-	}
+	
 
 	public Users findByUserIdAndCompanyIdAndStatus(String userId, Long companyId, int status) {
 		// TODO Auto-generated method stub
@@ -45,6 +43,11 @@ public class UserDAO {
 	public Users findBYCompanyIdAndStatus(Long companyId, int status) {
 		// TODO Auto-generated method stub
 		return userRepository.findByCompanyIdAndStatus( companyId, status);
+	}
+
+	public List<Users> findUsers(Long companyId) {
+		// TODO Auto-generated method stub
+		return userRepository.findUsers(companyId);
 	}
 
 	
