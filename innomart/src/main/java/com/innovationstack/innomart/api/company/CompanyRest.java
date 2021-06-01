@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.innovationstack.innomart.api.Mappings;
@@ -37,7 +38,7 @@ public class CompanyRest extends AbstractBaseController{
 	}
 
 	@RequestMapping(path = Mappings.GET_COMPANY_BY_ID, method = RequestMethod.GET, produces = Mappings.CHARSET)
-	public ResponseEntity<RestResponse>getCompanyById(@PathVariable Long companyId) {
+	public ResponseEntity<RestResponse>getCompanyById(@RequestParam Long companyId) {
 		Companies find = companyService.findByCompanyId(companyId);
 		return responseUtil.successResponse(find);
 	}

@@ -30,9 +30,9 @@ public class Products {
 	private Integer companyId;
 	@Column(name="productname",nullable=false)
 	private String productName;
-	@Column(name="browsingName",nullable=false)
+	@Column(name="browsing_name",nullable=false)
 	private String browsingName;
-	@Column(name="salePrice",nullable=false)
+	@Column(name="sale_price",nullable=false)
 	private Double salePrice;
 	@Column(name="listprice",nullable=false)
 	private Double listPrice;

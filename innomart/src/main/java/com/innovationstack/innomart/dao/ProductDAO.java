@@ -15,19 +15,21 @@ public class ProductDAO {
 	@Autowired
 	private ProductRepository productRepository;
 
-	public void saveProducts(Products products) {
+	public Products saveProducts(Products products) {
 		// TODO Auto-generated method stub
-		productRepository.save(products);
+		return productRepository.save(products);
 	}
 
 	public List<Products> getAllProductsByCompanyId(Long companyId) {
 		// TODO Auto-generated method stub
-		return productRepository.getAllProductsByCompanyId(companyId);
+		String companysId = companyId.toString();
+		return productRepository.getAllProductsByCompanyId(Integer.parseInt(companysId));
 	}
 
 	public Products getProductById(Long companyId, int productId) {
 		// TODO Auto-generated method stub
-		return productRepository.getProductById(companyId,productId);
+		String companysId = companyId.toString();
+		return productRepository.getProductById(Integer.parseInt(companysId),productId);
 	}
 
 	public List<Products> getProductByCompanyIdAndCategoryId(Long companyId, Long categoryId) {
@@ -35,9 +37,10 @@ public class ProductDAO {
 		return productRepository.getProductByCompanyIdAndCategoryId(companyId,categoryId);
 	}
 
-	public Iterable<Products> getProductById(Long companyId, List<Long> productIds) {
+	public Iterable<Products> getProductById(Long companyId, List<Integer> productIds) {
 		// TODO Auto-generated method stub
-		return productRepository.getProductById(companyId, productIds);
+		String companyIds = companyId.toString();
+		return productRepository.getProductById(Integer.parseInt(companyIds), productIds);
 		
 	}
 

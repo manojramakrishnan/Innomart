@@ -56,7 +56,7 @@ public class ProductRest extends AbstractBaseController{
 		products.setCreatedOn(createDate);
 		products.setDefaultImage(product.getDefaultImage());
 		products.setDescription(product.getDescription());
-		products.setId(product.getProductId());
+//		products.setId(product.getProductId());
 		products.setIsStockControlled(product.getIsStockControlled());
 		products.setListPrice(product.getListPrice());
 		products.setOverview(product.getOverview());
@@ -68,7 +68,7 @@ public class ProductRest extends AbstractBaseController{
 		products.setStatus(Constant.PRODUCT_STATUS.PENDING.getStatus());
 		products.setUpdatedOn(createDate);
 		
-		productService.save(products);
+		Products savedProducts = productService.save(products);
 		
 		for(Long categoriesId : product.getCategoriesId()) {
 			ProductCategoryId productCategoryId = new ProductCategoryId();
@@ -89,7 +89,7 @@ public class ProductRest extends AbstractBaseController{
 
 	}
 		
-	@RequestMapping(path = Mappings.GET_ALL_PRODUCTS, method = RequestMethod.POST, produces = Mappings.CHARSET)
+	@RequestMapping(path = Mappings.GET_ALL_PRODUCTS_BY_COMPANY_ID, method = RequestMethod.POST, produces = Mappings.CHARSET)
 	public ResponseEntity<RestResponse> getAllProducts(@PathVariable Long companyId) {
 		List<Products>  products= productService.getAllProductsByCompanyId(companyId);
 		return responseUtil.successResponse(products);
@@ -198,7 +198,7 @@ public class ProductRest extends AbstractBaseController{
 	}
 
 	@RequestMapping(path = Mappings.GET_PRODUCT_LIST_BY_ID, method = RequestMethod.POST, produces = Mappings.CHARSET)
-	public ResponseEntity<RestResponse>getProductListById(@PathVariable Long companyId, @RequestParam List<Long> productIds){
+	public ResponseEntity<RestResponse>getProductListById(@PathVariable Long companyId, @RequestParam List<Integer> productIds){
 				if(productIds !=null && !productIds.isEmpty()) {
 					List<Products> products = (List<Products>) productService.getProductById(companyId, productIds);
 					if(products != null) {

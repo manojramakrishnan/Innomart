@@ -14,16 +14,16 @@ import com.innovationstack.innomart.model.Products;
 public interface ProductRepository extends JpaRepository<Products, Integer> {
 
 	@Query("SELECT p FROM Products p WHERE  p.companyId = :companyId")
-	List<Products> getAllProductsByCompanyId(Long companyId);
+	List<Products> getAllProductsByCompanyId(Integer companyId);
 	
 	@Query("SELECT p FROM Products p WHERE p.companyId = :companyId And p.id = :productId")
-	Products getProductById(Long companyId, int productId);
+	Products getProductById(Integer companyId, int productId);
 	
 	@Query("SELECT p FROM Products p WHERE p.companyId = :companyId And p.id = :categoryId")
 	List<Products> getProductByCompanyIdAndCategoryId(Long companyId, Long categoryId);
 	
 	@Query ("SELECT p FROM Products p WHERE p.companyId = :companyId And p.id IN  (:productIds)")
-	Iterable<Products> getProductById(@Param ("companyId") long companyId, @Param ("productIds") List<Long>productIds);
+	Iterable<Products> getProductById(@Param ("companyId") Integer companyId, @Param ("productIds") List<Integer>productIds);
 
 
 }

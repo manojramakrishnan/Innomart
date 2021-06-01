@@ -19,9 +19,10 @@ public class ProductCategoryService {
 		productCategoryDAO.saveProductCategories(productCategories);
 	}
 
-	public List<ProductCategories> getProductCategoryByProductId(int productId) {
+	public List<ProductCategories> getProductCategoryByProductId(Integer productId) {
 		// TODO Auto-generated method stub
-		return productCategoryDAO.getProductCategoyByProductId(productId);
+		String prodId = productId.toString();
+		return productCategoryDAO.getProductCategoyByProductId(Long.parseLong(prodId));
 	}
 
 	public void delete(ProductCategories result) {

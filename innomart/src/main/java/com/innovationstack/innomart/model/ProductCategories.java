@@ -2,8 +2,10 @@ package com.innovationstack.innomart.model;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "product_categories")
 public class ProductCategories {
 	
 	@EmbeddedId

@@ -26,7 +26,7 @@ public class CompanyDAO {
 
 	public Companies findBYCompanyId(Long companyId) {
 		String cid = companyId.toString();
-		return companyRepository.findByCompanyId(Integer.valueOf(cid));
+		return companyRepository.findByCompanyId(Integer.parseInt(cid));
 
 	}
 	

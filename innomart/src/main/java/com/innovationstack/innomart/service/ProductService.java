@@ -24,9 +24,9 @@ public class ProductService {
 	private EntityManager entityManager;
 	
 
-	public void save(Products products) {
+	public Products save(Products products) {
 		// TODO Auto-generated method stub
-		productDAO.saveProducts(products);
+		return productDAO.saveProducts(products);
 		
 	}
 
@@ -69,7 +69,7 @@ public class ProductService {
 		return productDAO.getProductByCompanyIdAndCategoryId(companyId,categoryId);
 	}
 
-	public Iterable<Products> getProductById(Long companyId, List<Long> productIds) {
+	public Iterable<Products> getProductById(Long companyId, List<Integer> productIds) {
 		// TODO Auto-generated method stub
 		return productDAO.getProductById(companyId,productIds);
 	}

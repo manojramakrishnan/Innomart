@@ -19,7 +19,7 @@ public class ProductCategoryDAO {
 		productCategoryRepository.save(productCategories);
 	}
 
-	public List<ProductCategories> getProductCategoyByProductId(int productId) {
+	public List<ProductCategories> getProductCategoyByProductId(Long productId) {
 		// TODO Auto-generated method stub
 		return productCategoryRepository.getProductCategoryByproductId(productId);
 	}
